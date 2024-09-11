@@ -5,26 +5,30 @@ namespace Data
 {
     public class WaveData
     {
-        public readonly List<long[]> Wave;
+        public readonly long[,] Wave2DArray;
+
         public WaveData(Dictionary<string, string> dataPair)
         {
-            int maxRow = dataPair.Count - 1;
-            Wave = new List<long[]>(maxRow);
+            int rowCount = dataPair.Count - 1;
+            int colCount = 5;//이건 생각좀 ..
 
-            for (int row = 0; row < maxRow; row++)
+            Wave2DArray = new long[rowCount, colCount];
+
+            for (int i = 0; i < rowCount; i++)
             {
-                string key = $"Row{row + 1}";
-
+                string key = $"Row{i + 1}";
                 if (dataPair.TryGetValue(key, out string columnData))
                 {
                     var columnArray = System.Array.ConvertAll(columnData.Split('|'), long.Parse);
 
-                    if (columnArray.Length != 5)
+                    if (columnArray.Length != colCount)
                     {
                         Debug.LogWarning($"{key} does not contain exactly 5 elements.");
                         continue;
                     }
-                    Wave.Add(columnArray);
+
+                    for (int j = 0; j < colCount; j++)
+                        Wave2DArray[i, j] = columnArray[j];
                 }
             }
         }
