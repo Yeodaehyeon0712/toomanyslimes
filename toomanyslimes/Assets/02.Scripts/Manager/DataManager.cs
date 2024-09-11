@@ -6,10 +6,14 @@ public class DataManager : TSingletonMono<DataManager>
 {
 
     public static WaveTable WaveTable;
+    public static StageTable StageTable;
+
     protected override void OnInitialize()
     {
         WaveTable = LoadTable<WaveTable>(eTableName.WaveTable);
         WaveTable.Reload();
+        StageTable = LoadTable<StageTable>(eTableName.StageTable);
+        StageTable.Reload();
 
         IsLoad = true;      
     }
@@ -25,5 +29,6 @@ public class DataManager : TSingletonMono<DataManager>
 public enum eTableName
 {
     WaveTable = 1 << 0,
+    StageTable = 1 << 1,
     All = ~0,
 }
