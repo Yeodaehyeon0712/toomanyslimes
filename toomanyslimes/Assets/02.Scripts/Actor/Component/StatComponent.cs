@@ -9,32 +9,32 @@ public class StatComponent : BaseComponent
     float attackDamage;
     float attackSpeed;
 
-    public double HP=>hp;
+    public double HP =>hp;
     public float AttackDamage=>attackDamage;
     public float AttackSpeed=>attackSpeed;
     #endregion
 
     public StatComponent(Actor owner) : base(owner, eComponent.StatComponent)
     {
-        OnReset();
-        if(_owner.ActorType==eActorType.Enemy)
+
+    }
+
+    protected override void OnReset()
+    {
+        if (_owner.ActorType == eActorType.Enemy)
         {
             var monsterData = DataManager.MonsterTable[_owner.Index];
             this.hp = monsterData.HP;
             attackDamage = monsterData.AttackDamage;
             attackSpeed = monsterData.AttackSpeed;
         }
-        //임시
-        hp = 100;
-        attackDamage=50;
-        attackSpeed=1;
-    }
-
-    protected override void OnReset()
-    {
-        hp = 0f;
-        attackDamage = 0f;
-        attackSpeed = 0f;
+        else if (_owner.ActorType == eActorType.Player)
+        {
+            //임시
+            hp = 100;
+            attackDamage = 50;
+            attackSpeed = 1;
+        }
     }
 
 }

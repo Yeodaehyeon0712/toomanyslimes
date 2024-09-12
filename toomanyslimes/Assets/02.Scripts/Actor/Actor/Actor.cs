@@ -70,6 +70,7 @@ public class Actor : MonoBehaviour
         worldID = _worldID;
         spawnHashCode = _spawnHashCode;
         actorType = _type;
+        statComponent.Reset();
         currentHP = statComponent.HP;
         gameObject.SetActive(true);
     }
@@ -88,6 +89,7 @@ public class Actor : MonoBehaviour
             currentHP = 0;
             Death();
         }
+        Debug.Log($"{actorType}이{damage}의 공격력으로 피격당함 현재 체력은 {currentHP}");
     }
     public virtual void Recovery(double recovery)
     {
@@ -113,6 +115,11 @@ public class Actor : MonoBehaviour
     {
         foreach (var component in _componentDictionary)
             component.Value.NextFrame(deltaTime);
+    }
+    void ResetComponent()
+    {
+        foreach (var component in _componentDictionary)
+            component.Value.Reset();
     }
     #endregion
 }

@@ -95,11 +95,17 @@ public class CollisionCheckComponent : BaseComponent
     }
     void DetactBattleTarget(GameObject target)
     {
-        fsmComponent.Target = target.GetComponent<Actor>();
+        var targetActor = target.GetComponent<Actor>();
+        fsmComponent.Target = targetActor;
         fsmComponent.State = eFSMState.Battle;
+
+        var targetFSM = targetActor.FSM;
+        targetFSM.Target = _owner;
+        targetFSM.State = eFSMState.Battle;
     }
     void ClearTarget()
     {
+        fsmComponent.Target.FSM.State = eFSMState.Move;
         fsmComponent.State = eFSMState.Move;
     }
     #endregion
