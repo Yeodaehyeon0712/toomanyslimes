@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum eComponent
 {
-    MovementComponent,
+    ControllerComponent,
+    FSMComponent,
     BattleComponent,
     StatComponent,
     SkinComponent,
-    ControllerComponent,
 }
 public class BaseComponent 
 {

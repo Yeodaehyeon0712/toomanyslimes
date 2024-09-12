@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Character : Actor
 {
-    [SerializeField] protected MovementComponent _movementComponent;
+    [SerializeField] protected ControllerComponent controllerComponent;
     public override void Initialize()
     {
         base.Initialize();
-        _movementComponent = new MovementComponent(this);
+        controllerComponent = new ControllerComponent(this);
     }
 
     #region Trigger Method
@@ -18,10 +18,10 @@ public class Character : Actor
         switch (collision.tag)
         {
             case "Border_L":
-                _movementComponent.TouchedLeft = true;
+                controllerComponent.TouchedLeft = true;
                 break;
             case "Border_R":
-                _movementComponent.TouchedRight = true;
+                controllerComponent.TouchedRight = true;
                 break;
         }
     }
@@ -30,12 +30,17 @@ public class Character : Actor
         switch (collision.tag)
         {
             case "Border_L":
-                _movementComponent.TouchedLeft = false;
+                controllerComponent.TouchedLeft = false;
                 break;
             case "Border_R":
-                _movementComponent.TouchedRight = false;
+                controllerComponent.TouchedRight = false;
                 break;
         }
+    }
+    protected override void FixedUpdate()
+    {
+        if (controllerComponent != null)
+            controllerComponent.FixedUpdate(Time.fixedDeltaTime);
     }
     #endregion
 }

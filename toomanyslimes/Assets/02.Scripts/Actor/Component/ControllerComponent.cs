@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementComponent : BaseComponent
+public class ControllerComponent : BaseComponent
 {
     public float speed=3;
     public bool TouchedLeft{ get; set; }
     public bool TouchedRight { get; set; }
-    public MovementComponent(Actor owner) : base(owner, eComponent.MovementComponent)
+    public ControllerComponent(Actor owner) : base(owner, eComponent.ControllerComponent)
     {
         OnReset();
     }
@@ -21,7 +21,7 @@ public class MovementComponent : BaseComponent
         Vector3 nextPos = new Vector3(h * speed * Time.deltaTime, 0, 0);
         _owner.transform.Translate(nextPos);
     }
-    protected override void OnUpdate(float fixedDeltaTime)
+    protected override void OnFixedUpdate(float fixedDeltaTime)
     {
         Move();
     }

@@ -30,10 +30,11 @@ public class Actor : MonoBehaviour
     public uint WorldID => worldID;
 
 
-
     protected double currentHP;
     #region Component Fields
     protected Dictionary<eComponent, BaseComponent> _componentDictionary = new Dictionary<eComponent, BaseComponent>();
+    public FSMComponent FSM => fsmComponent;
+    [SerializeField] protected FSMComponent fsmComponent;
     #endregion
 
     #endregion
@@ -41,7 +42,7 @@ public class Actor : MonoBehaviour
     #region Init Method
     public virtual void Initialize()
     {
-        //_controllerComponent = new ControllerComponent(this);
+        fsmComponent = new FSMComponent(this);
     }
     #endregion
 
@@ -52,7 +53,8 @@ public class Actor : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
-        //if (_controllerComponent != null) _controllerComponent.FixedUpdate(TimeManager.FixedDeltaTime);
+        if (fsmComponent != null) 
+            fsmComponent.FixedUpdate(Time.fixedDeltaTime);
     }
     #endregion
 
@@ -67,6 +69,7 @@ public class Actor : MonoBehaviour
     }
     public virtual void Death()
     {
+        fsmComponent.State = eFSMState.Death;
         SpawnManager.Instance.RegisterActorPool(worldID);
         StopAllCoroutines();
         gameObject.SetActive(false);
