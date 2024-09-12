@@ -22,7 +22,7 @@ public class NormalStageFramework : StageFramework
     IEnumerator IEWaveProcess()
     {
         //배경을 움직이자 .
-        BackgroundManager.Instance.ReqisterResetAction(SpawnWave);
+        BackgroundManager.Instance.ReqisterBGResetAction(SpawnWave);
         BackgroundManager.Instance.IsBGMove = true;
         //이제 게임의 진행을 체크
         while (currentContentsResultState == eContentResultState.InProgress)
@@ -43,14 +43,15 @@ public class NormalStageFramework : StageFramework
     }
     void SpawnWave()
     {
-        currentWaveProgress++;
-        Data.WaveData waveData = DataManager.WaveTable[currentWaveProgress];
-        SpawnManager.Instance.SpawnWave(waveData, CurrentStageData.MonsterIndexArr);
-        if (currentWaveProgress > RaceStageCount)
+        if (currentWaveProgress >= RaceStageCount)
         {
             BackgroundManager.Instance.IsBGMove=false;
             Debug.Log("모두 소진");
+            return;
         }
+        currentWaveProgress++;
+        Data.WaveData waveData = DataManager.WaveTable[currentWaveProgress];
+        SpawnManager.Instance.SpawnWave(waveData, CurrentStageData.MonsterIndexArr);
     }
     void CheckStageState()
     {

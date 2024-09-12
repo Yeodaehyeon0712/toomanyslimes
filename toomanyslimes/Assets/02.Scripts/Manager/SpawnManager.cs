@@ -8,7 +8,7 @@ public class SpawnManager : TSingletonMono<SpawnManager>
     #region Fields
     ActorFactory actorFactory;
     Transform actorFactoryRoot;
-    Queue<(Transform parent,Transform[,]points)> spawnPointsQueue=new Queue<(Transform, Transform[,])>();
+    Queue<SpawnPoints> spawnPointsQueue = new Queue<SpawnPoints>();
     #endregion
    
     protected override void OnInitialize()
@@ -30,70 +30,55 @@ public class SpawnManager : TSingletonMono<SpawnManager>
     #region SpawnPoints Method
     void GenerateSpawnPoints()
     {
-        var prefab = Resources.Load<Transform>("Prefabs/SpawnPoints");
+        var prefab = Resources.Load<SpawnPoints>("Prefabs/SpawnPoints");
         var cloneAsset = Instantiate(prefab,actorFactoryRoot);
-        Populate2DArray(cloneAsset);
-    }
-    void Populate2DArray(Transform parentTransform)
-    {
-        int rowCount = parentTransform.childCount;
-        int colCount = parentTransform.GetChild(0).childCount;
-        var spawnPoint2DArray = new Transform[rowCount,colCount];
-
-        for(int i=0;i<rowCount;i++)
-        {
-            var rowPoints = parentTransform.GetChild(i);
-            for(int j=0;j<colCount;j++)
-                spawnPoint2DArray[i,j] = rowPoints.GetChild(j);
-        }
-        spawnPointsQueue.Enqueue((parentTransform,spawnPoint2DArray));
-    }
-    (Transform parent,Transform[,] points) GetSpawnPoints()
+        cloneAsset.Init();
+        spawnPointsQueue.Enqueue(cloneAsset);
+    }    
+    SpawnPoints GetSpawnPoints()
     {
         if (spawnPointsQueue.Count == 0)
             GenerateSpawnPoints();
 
         return spawnPointsQueue.Dequeue();
     }
-    public void ReturnPoint(Transform returnPoint)
+    public void RegisterCleanedSpawnPoints(SpawnPoints spawnPoints)
     {
-        //returnPoint.SetParent(actorFactoryRoot);
-        //Populate2DArray(returnPoint);
+        spawnPointsQueue.Enqueue(spawnPoints);
     }
     #endregion
 
+    #region Spawn Method
     public void SpawnWave(Data.WaveData waveData,long[]monsterIndexArr)
     {
         var wave2DArray = waveData.Wave2DArray;
-
         int rowCount = wave2DArray.GetLength(0);
         int colCount = wave2DArray.GetLength(1);
 
-        var touple = GetSpawnPoints();
-        var parent = touple.parent;
-        var spawnPoint = touple.points;
+        SpawnPoints points=GetSpawnPoints();
 
         for (int i=0;i<rowCount;i++)
         {
             for(int j=0;j<colCount;j++)
             {
                 var item = wave2DArray[i, j];
-                var tr = spawnPoint[i, j];
+                var point = points.GetPoint(i, j);
                 if (item==0)
                 {
                     //아무것도 안함
                 }
                 else if(item==1)
                 {
-                    long monster = GetRandomMonsterIndex(monsterIndexArr);
-                    actorFactory.GetActor<Actor>(eActorType.Enemy,monster,tr);
+                    long monsterIndex = GetRandomMonsterIndex(monsterIndexArr);
+                    var actor = actorFactory.GetActor<Actor>(eActorType.Enemy,monsterIndex,point);
+                    points.RegisterActor(actor);
                 }
             }
         }
 
         Transform spawnTargetBG = BackgroundManager.Instance.GetFirstBG();
-        parent.SetParent(spawnTargetBG);
-        parent.localPosition = Vector3.zero;
+        points.transform.SetParent(spawnTargetBG);
+        points.transform.localPosition = Vector3.zero;
     }   
     long GetRandomMonsterIndex(long[]monsterIndexArr)
     {
@@ -119,6 +104,7 @@ public class SpawnManager : TSingletonMono<SpawnManager>
     //    Debug.LogWarning($"Warning : Wave {waveData}is Not Valid .");
     //    return null;
     //}
+    #endregion
     #endregion
 
 }

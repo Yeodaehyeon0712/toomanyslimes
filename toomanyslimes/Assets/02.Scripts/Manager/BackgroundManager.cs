@@ -12,6 +12,8 @@ public class BackgroundManager : TSingletonMono<BackgroundManager>
     int startIndex;
     int endIndex;
     float viewHeight;
+
+    System.Action resetBGAction;
     #endregion
 
     #region Init Method
@@ -34,6 +36,10 @@ public class BackgroundManager : TSingletonMono<BackgroundManager>
 #endregion
 
     #region BackGround Method   
+    public void SetBackground(long index)
+    {
+        //배경 설정
+    }
     void GenerateBG()
     {
         var origin = Resources.Load<Transform>("Prefabs/Background");
@@ -45,7 +51,7 @@ public class BackgroundManager : TSingletonMono<BackgroundManager>
             backgrounds[i] = bg;
         }
     }
-    public void MoveBG()
+    void MoveBG()
     {
         if (IsBGMove == false) return;
         transform.Translate(Vector3.down * BGSpeed * Time.deltaTime);
@@ -55,25 +61,33 @@ public class BackgroundManager : TSingletonMono<BackgroundManager>
     }
     void ResetBG()
     {
+        ResetSpawnPoints();
+
         Vector3 newPos = backgrounds[startIndex].localPosition + Vector3.up * viewHeight;
         backgrounds[endIndex].localPosition = newPos;
 
         startIndex = endIndex;
         endIndex = (endIndex == 0) ? backgrounds.Length - 1 : (endIndex - 1);
-        resetAction?.Invoke();
+
+        resetBGAction?.Invoke();
     }
-    public void SetBackground(long index)
+    void ResetSpawnPoints()
     {
-        //배경 설정
+        var spawnPoints = backgrounds[endIndex].GetComponentInChildren<SpawnPoints>();
+        spawnPoints?.ResetPoints();
     }
-    System.Action resetAction;
-    public void ReqisterResetAction(System.Action action)
+    //해당 액션 등록 해제도 생각하자 ..
+    public void ReqisterBGResetAction(System.Action action)
     {
-        resetAction = action;
+        resetBGAction = action;
     }
     public Transform GetFirstBG()
     {
         return backgrounds[startIndex];
+    }
+    public Transform GetLastBG()
+    {
+        return backgrounds[endIndex];
     }
     #endregion
 }
