@@ -11,6 +11,7 @@ public class SpawnManager : TSingletonMono<SpawnManager>
     Queue<SpawnPoints> spawnPointsQueue = new Queue<SpawnPoints>();
     #endregion
    
+    #region Init Method
     protected override void OnInitialize()
     {
         GenerateFactory();
@@ -18,7 +19,6 @@ public class SpawnManager : TSingletonMono<SpawnManager>
         IsLoad = true;
     }
 
-    #region Factory Method
     void GenerateFactory()
     {
         actorFactoryRoot = new GameObject("actorFactory").transform;
@@ -49,6 +49,8 @@ public class SpawnManager : TSingletonMono<SpawnManager>
     #endregion
 
     #region Spawn Method
+    public T SpawnCharacter<T>(long index) where T : Actor => actorFactory.GetActor<T>(eActorType.Player, index);
+
     public void SpawnWave(Data.WaveData waveData,long[]monsterIndexArr)
     {
         var wave2DArray = waveData.Wave2DArray;
@@ -85,32 +87,9 @@ public class SpawnManager : TSingletonMono<SpawnManager>
         int selectRandom = Random.Range(0, monsterIndexArr.Length);
         return monsterIndexArr[selectRandom];
     }
-    #region Valid Check Method
-    //(int,int)? ValidateWave(Data.WaveData waveData)
-    //{
-    //    var wave2DArray = waveData.Wave2DArray;
-
-    //    int waveRowCount = wave2DArray.GetLength(0);
-    //    int waveColCount = wave2DArray.GetLength(1);
-
-    //    int pointRowCount=spawnPoint2DArray.GetLength(0);
-    //    int pointColCount=spawnPoint2DArray.GetLength(1);
-
-    //    if((waveRowCount==pointRowCount)&&(waveColCount==pointColCount))
-    //    {
-    //        return (waveRowCount, waveColCount);
-    //    }
-
-    //    Debug.LogWarning($"Warning : Wave {waveData}is Not Valid .");
-    //    return null;
-    //}
-    #endregion
     #endregion
 
+    #region RegisterMethod
     public void RegisterActorPool(uint worldID) => actorFactory.RegisterActorAtPool(worldID);
-    public void SpawnPlayer()
-    {
-        var actor = actorFactory.GetActor<Actor>(eActorType.Player,1,this.transform);
-    }
-    public T SpawnCharacter<T>(long index) where T : Actor => actorFactory.GetActor<T>(eActorType.Player, index);
+    #endregion
 }
