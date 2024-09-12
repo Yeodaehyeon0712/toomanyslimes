@@ -5,6 +5,7 @@ public enum eComponent
 {
     ControllerComponent,
     FSMComponent,
+    ColiisionCheckComponent,
     BattleComponent,
     StatComponent,
     SkinComponent,

@@ -7,11 +7,12 @@ TagManager:
   - Border_L
   - Border_R
   - Enemy
+  - Obstacle
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - RaycastTarget
   - Water
   - UI
   - 
