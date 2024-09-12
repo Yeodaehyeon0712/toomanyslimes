@@ -18,7 +18,8 @@ public abstract class StageFramework
     public virtual IEnumerator SetupStage(long stageIndex)
     {
         BackgroundManager.Instance.SetBackground(DataManager.StageTable[stageIndex].BGIndex);
-        // 플레이어 소환 by Actor Manager
+        // 플레이어 소환 by Actor Manager : 이건 추후에 수정 ..
+        var Character = SpawnManager.Instance.SpawnCharacter<Actor>(1);
         yield return null;
     }
     public abstract IEnumerator IEStageProcess(long stageIndex);

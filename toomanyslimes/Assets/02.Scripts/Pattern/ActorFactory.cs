@@ -24,11 +24,11 @@ public class ActorFactory
     }
 
     #region Factory Method
-    public T GetActor<T>(eActorType type,long index,Transform spawnPoint)where T:Actor
+    public T GetActor<T>(eActorType type,long index,Transform spawnPoint=null)where T:Actor
     {
         ++currentWorldID;
 
-        string resourcePath = "Prefabs/A";
+        string resourcePath = "Prefabs/AB";
         int pathHash = 0;
         //데이터 매니저로부터 해당 인덱스의 데이터를 받는다 .
 
@@ -43,12 +43,14 @@ public class ActorFactory
         if(spawnedActor==null)
         {
             T prefabs=Resources.Load<T>(resourcePath);
-            T cloneAsset = Object.Instantiate(prefabs, spawnPoint);
+
+            T cloneAsset =Object.Instantiate(prefabs, spawnPoint);
             cloneAsset.Initialize();
             spawnedActor = cloneAsset;
         }
         else//풀에 있다면
         {
+            if(spawnPoint!=null)
             spawnedActor.transform.SetParent(spawnPoint);
         }
 
@@ -63,7 +65,7 @@ public class ActorFactory
         Actor temp = actorDic[worldID];
         actorDic.Remove(worldID);
         //사용후 돌려놓는 과정
-        // actorPool[temp.CharacterType][temp.SpawnHashCode].Register(temp);
+        //actorPool[temp.ActorType][temp.SpawnHashCode].Register(temp);
         temp.transform.SetParent(instanceRoot);//이건 테스트 .
     }
     #endregion

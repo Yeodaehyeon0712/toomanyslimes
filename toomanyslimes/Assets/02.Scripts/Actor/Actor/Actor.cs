@@ -53,8 +53,7 @@ public class Actor : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
-        if (fsmComponent != null) 
-            fsmComponent.FixedUpdate(Time.fixedDeltaTime);
+
     }
     #endregion
 

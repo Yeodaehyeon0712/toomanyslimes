@@ -107,4 +107,10 @@ public class SpawnManager : TSingletonMono<SpawnManager>
     #endregion
     #endregion
 
+    public void RegisterActorPool(uint worldID) => actorFactory.RegisterActorAtPool(worldID);
+    public void SpawnPlayer()
+    {
+        var actor = actorFactory.GetActor<Actor>(eActorType.Player,1,this.transform);
+    }
+    public T SpawnCharacter<T>(long index) where T : Actor => actorFactory.GetActor<T>(eActorType.Player, index);
 }
