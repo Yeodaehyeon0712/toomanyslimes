@@ -54,33 +54,18 @@ public class NormalStageFramework : StageFramework
     }
     void CheckStageState()
     {
-
-    }
-    //플레이어 혹은 보스 몬스터의 죽음을 체크함
-    //IEnumerator IESubProcess()
-    //{
-    //    //플레이어의 죽음을 체크
-    //    if (Player.PlayerCharacter.FSMState == eFSMState.Death)
-    //    {
-    //        _currentContentsResultState = eContentResultState.Defeat;
-    //        break;
-    //    }
-
-    //    if (constructure.LoadActor.FSMState == eFSMState.Death)
-    //    {
-    //        _currentContentsResultState = eContentResultState.Victory;
-    //        break;
-    //    }
-    //}
-    public void ASDASD()
-    {
-        //리셋이 진행 될 때마다 웨이브가 해당 리셋 장소에 설치되면 됨 .
-        
+        ////플레이어가 죽었다면
+        //if (Player.PlayerCharacter.FSMState == eFSMState.Death)
+        //{
+        //    currentContentsResultState = eContentResultState.Defeat;
+        //    return;
+        //}
+        ////보스가 죽었다면
+        //if(true)
+        //{
+        //    currentContentsResultState = eContentResultState.Victory;
+        //    return;
+        //}
     }
 }
-public enum eStageType
-{
-    Race,
-    Loop,
-    Boss,
-}
+
