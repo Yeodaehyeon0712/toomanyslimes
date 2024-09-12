@@ -7,10 +7,10 @@ public class CollisionCheckComponent : BaseComponent
     #region Fields
     LayerMask obstacleLayer=1<<3;
     Transform ownerTransform;
-    GameObject battleTarget;
     float rayLength = 0.5f; 
 
     ControllerComponent controllerComponent;
+    FSMComponent fsmComponent;
     #endregion
 
     #region Component Method
@@ -18,6 +18,7 @@ public class CollisionCheckComponent : BaseComponent
     {
         OnReset();
         controllerComponent = _owner.GetComponent<ControllerComponent>(eComponent.ControllerComponent);
+        fsmComponent = _owner.FSM;
         ownerTransform = _owner.transform;
     }
     protected override void OnUpdate(float fixedDeltaTime)
@@ -78,18 +79,28 @@ public class CollisionCheckComponent : BaseComponent
     void CheckBattleTarget()
     {
         RaycastHit2D hit = Physics2D.Raycast(ownerTransform.position, Vector2.up, rayLength, obstacleLayer);
-        //주변에 아무것도 충돌할게 없다거나 충돌체가 적이 아니라면 배틀하는 상태에서 벗어난다 .
         if (hit.collider == null|| hit.collider.CompareTag("Enemy") == false)
         {
-            battleTarget = null;
+            //대상이 있다가 피한경우
+            if (fsmComponent.Target != null)
+                ClearTarget();
             return;
         }
+        var target = hit.collider.gameObject;
         //이미 타겟으로 지정한 적과 충돌했다면 아무것도 하지 않는다 .
-        if (battleTarget == hit.collider.gameObject) return;
+        if (fsmComponent.Target != null&&fsmComponent.Target.gameObject == target) return;
 
-        //새로운 적이 감지되었다면
-        battleTarget = hit.collider.gameObject;
-        Debug.Log("공격");      
+        //새로운 적이 감지되었다면 타겟으로 지정
+        DetactBattleTarget(target);  
+    }
+    void DetactBattleTarget(GameObject target)
+    {
+        fsmComponent.Target = target.GetComponent<Actor>();
+        fsmComponent.State = eFSMState.Battle;
+    }
+    void ClearTarget()
+    {
+        fsmComponent.State = eFSMState.Move;
     }
     #endregion
 }

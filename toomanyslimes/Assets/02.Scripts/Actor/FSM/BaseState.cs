@@ -1,11 +1,11 @@
 public abstract class BaseState 
 {
     protected Actor _owner;
-    protected FSMComponent _controller;
+    protected FSMComponent _fsm;
     public BaseState(Actor owner)
     {
         _owner = owner;
-        _controller = _owner.GetComponent<FSMComponent>(eComponent.ControllerComponent);
+        _fsm = _owner.GetComponent<FSMComponent>(eComponent.ControllerComponent);
     }
     public abstract void OnStateEnter();
     public abstract void OnStateStay(float deltaTime);

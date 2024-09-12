@@ -6,6 +6,7 @@ public class FSMComponent : BaseComponent
     #region Fields
     [SerializeField] Dictionary<eFSMState, BaseState> _fsmDictionary = new Dictionary<eFSMState, BaseState>();
     eFSMState currentState = eFSMState.Idle;
+    public Actor Target;
 
     public eFSMState State
     {
