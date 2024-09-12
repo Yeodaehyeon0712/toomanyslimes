@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : BaseState
+public class DeathState : BaseState
 {
-    public IdleState(Actor owner):base(owner)
+    public DeathState(Actor owner):base(owner)
     {
 
     }

@@ -5,7 +5,7 @@ public abstract class BaseState
     public BaseState(Actor owner)
     {
         _owner = owner;
-        _fsm = _owner.GetComponent<FSMComponent>(eComponent.ControllerComponent);
+        _fsm = _owner.GetComponent<FSMComponent>(eComponent.FSMComponent);
     }
     public abstract void OnStateEnter();
     public abstract void OnStateStay(float deltaTime);
@@ -17,8 +17,7 @@ public abstract class BaseState
 }
 public enum eFSMState
 {
-    Idle = 1 << 0,
-    Move = 1 << 1,
-    Battle = 1 << 2,
-    Death = 1 << 3,
+    Move = 1 << 0,
+    Battle = 1 << 1,
+    Death = 1 << 2,
 }

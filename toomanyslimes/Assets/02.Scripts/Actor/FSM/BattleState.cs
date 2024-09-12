@@ -14,10 +14,12 @@ public class BattleState : BaseState
     }
     public override void OnStateEnter()
     {
-    
+        Debug.Log("공격 상태에 진입");
+
     }
     public override void OnStateStay(float deltaTime)
     {
+        //공격 대상이 있다면
         if (_fsm.Target != null)
         {
             //죽었으면 대상에서 제외.
@@ -26,25 +28,33 @@ public class BattleState : BaseState
                 _fsm.Target = null;
                 return;
             }
-            //기본 공격이 가능하다면 기본공격 수행
-            if (_owner.DefaultAttackElapsedTime > 1f)
-            {
-                DefaultAttack();
-                return;
-            }
+
+            Attack();            
         }
     }
 
     public override void OnStateExit()
     {
+        Debug.Log("공격 상태에서 벗어남");
+
         _fsm.Target = null;
     }
 
+    void Attack()
+    {
+        DefaultAttack();
+        SkillAttack();
+    }
     void DefaultAttack()
     {
+        if (_owner.DefaultAttackElapsedTime < 1f) return;
+        Debug.Log("공격");
         _owner.DefaultAttackElapsedTime = 0f;
-        //나의 공격력을 담아 ..
         _fsm.Target.Hit(3f);
+    }
+    void SkillAttack()
+    {
+
     }
 
 }

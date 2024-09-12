@@ -30,11 +30,13 @@ public class Actor : MonoBehaviour
     public uint WorldID => worldID;
 
 
-    protected double currentHP;
+    protected double currentHP=5;
+    public float DefaultAttackElapsedTime;
     #region Component Fields
     protected Dictionary<eComponent, BaseComponent> _componentDictionary = new Dictionary<eComponent, BaseComponent>();
     public FSMComponent FSM => fsmComponent;
     [SerializeField] protected FSMComponent fsmComponent;
+    public eFSMState FSMState => fsmComponent.State;
     #endregion
 
     #endregion
@@ -50,6 +52,7 @@ public class Actor : MonoBehaviour
     protected virtual void Update()
     {
         OnUpdateComponent(Time.deltaTime);
+        DefaultAttackElapsedTime += Time.deltaTime;
     }
     protected virtual void FixedUpdate()
     {
@@ -72,6 +75,13 @@ public class Actor : MonoBehaviour
         SpawnManager.Instance.RegisterActorPool(worldID);
         StopAllCoroutines();
         gameObject.SetActive(false);
+    }
+    public virtual void Hit(float damage)
+    {
+        currentHP -= damage;
+        //ui Ã³¸®
+        if (currentHP <= 0f)
+            Death();
     }
     #endregion
 
