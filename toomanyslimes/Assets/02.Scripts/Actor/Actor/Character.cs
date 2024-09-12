@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Character : Actor
 {
+    public ControllerComponent Controller => controllerComponent;
     [SerializeField] protected ControllerComponent controllerComponent;
+    public CollisionCheckComponent Collision => collisionCheckComponent;
     [SerializeField] protected CollisionCheckComponent collisionCheckComponent;
 
     public override void Initialize()

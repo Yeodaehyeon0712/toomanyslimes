@@ -7,6 +7,7 @@ public class CollisionCheckComponent : BaseComponent
     #region Fields
     LayerMask obstacleLayer=1<<3;
     Transform ownerTransform;
+    GameObject battleTarget;
     float rayLength = 0.5f; 
 
     ControllerComponent controllerComponent;
@@ -74,7 +75,6 @@ public class CollisionCheckComponent : BaseComponent
     #endregion
 
     #region Check Battle Method
-    GameObject battleTarget;
     void CheckBattleTarget()
     {
         RaycastHit2D hit = Physics2D.Raycast(ownerTransform.position, Vector2.up, rayLength, obstacleLayer);
@@ -89,9 +89,7 @@ public class CollisionCheckComponent : BaseComponent
 
         //새로운 적이 감지되었다면
         battleTarget = hit.collider.gameObject;
-        Debug.Log("공격");
-       
+        Debug.Log("공격");      
     }
-
     #endregion
 }
