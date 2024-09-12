@@ -8,6 +8,8 @@ public class DataManager : TSingletonMono<DataManager>
     public static WaveTable WaveTable;
     public static StageTable StageTable;
     public static MonsterTable MonsterTable;
+    public static CharacterTable CharacterTable;
+
 
     protected override void OnInitialize()
     {
@@ -19,6 +21,9 @@ public class DataManager : TSingletonMono<DataManager>
 
         MonsterTable = LoadTable<MonsterTable>(eTableName.MonsterTable);
         MonsterTable.Reload();
+
+        CharacterTable = LoadTable<CharacterTable>(eTableName.CharacterTable);
+        CharacterTable.Reload();
 
         IsLoad = true;      
     }
@@ -36,5 +41,6 @@ public enum eTableName
     WaveTable = 1 << 0,
     StageTable = 1 << 1,
     MonsterTable = 1 << 2,
+    CharacterTable=1<<3,
     All = ~0,
 }

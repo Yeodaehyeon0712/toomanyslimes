@@ -67,10 +67,8 @@ public class ActorFactory
         {
             case eActorType.Player:
                 {
-                    //resourcePath = DataManager.CharacterTable[index].ResourcePath;
-                    //pathHash = DataManager.CharacterTable[index].PathHash;
-                    resourcePath = "Prefabs/AB";
-                    pathHash = 1;
+                    resourcePath = DataManager.CharacterTable[index].ResourcePath;
+                    pathHash = DataManager.CharacterTable[index].PathHash;
                 }
                 break;
             case eActorType.Enemy:
