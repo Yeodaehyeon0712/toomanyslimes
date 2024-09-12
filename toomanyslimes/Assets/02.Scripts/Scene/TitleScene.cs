@@ -20,6 +20,8 @@ public class TitleScene : MonoBehaviour
     #region Init Method
     void InitReference()
     {
+        DontDestroyOnLoad(this);
+
         _sceneChangeEventButton = transform.Find("StartButton").GetComponent<Button>();
         _sceneChangeEventButton.onClick.AddListener(OnClickSceneChange);
         _sceneChangeEventButton.gameObject.SetActive(false);
@@ -62,7 +64,7 @@ public class TitleScene : MonoBehaviour
 
         Debug.Log("¾À ÀÌµ¿ ¿Ï·á");
         //UIManager.Instance.GameUI.Enable();
-        //StageManager.Instance.SetupStage(eContentsType.Normal, Player.SnapshotDataProperty.Data.CurrentStageIndex);
+        StageManager.Instance.SetupStage(eContentsType.Normal, 1);
 
         StopAllCoroutines();
         DestroyImmediate(gameObject);

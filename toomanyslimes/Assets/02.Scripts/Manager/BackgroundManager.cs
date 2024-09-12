@@ -5,10 +5,10 @@ using UnityEngine;
 public class BackgroundManager : TSingletonMono<BackgroundManager>
 {
     #region Fields
-    public bool IsBGMove { get; set; } = true;
+    public bool IsBGMove { get; set; } 
     public float BGSpeed { get; set; } = 3;
 
-    Transform[] backgrounds = new Transform[3];
+    public Transform[] backgrounds = new Transform[3];
     int startIndex;
     int endIndex;
     float viewHeight;
@@ -45,8 +45,9 @@ public class BackgroundManager : TSingletonMono<BackgroundManager>
             backgrounds[i] = bg;
         }
     }
-    void MoveBG()
+    public void MoveBG()
     {
+        if (IsBGMove == false) return;
         transform.Translate(Vector3.down * BGSpeed * Time.deltaTime);
 
         if (backgrounds[endIndex].position.y < -viewHeight)
@@ -59,6 +60,20 @@ public class BackgroundManager : TSingletonMono<BackgroundManager>
 
         startIndex = endIndex;
         endIndex = (endIndex == 0) ? backgrounds.Length - 1 : (endIndex - 1);
+        resetAction?.Invoke();
+    }
+    public void SetBackground(long index)
+    {
+        //배경 설정
+    }
+    System.Action resetAction;
+    public void ReqisterResetAction(System.Action action)
+    {
+        resetAction = action;
+    }
+    public Transform GetFirstBG()
+    {
+        return backgrounds[startIndex];
     }
     #endregion
 }

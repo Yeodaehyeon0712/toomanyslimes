@@ -6,17 +6,11 @@ using UnityEngine;
 public class SpawnManager : TSingletonMono<SpawnManager>
 {
     #region Fields
-    //몬스터와 캐릭터를 관리 ..
     ActorFactory actorFactory;
     Transform actorFactoryRoot;
-    Queue<Transform[,]> spawnPointsQueue=new Queue<Transform[,]>();
+    Queue<(Transform parent,Transform[,]points)> spawnPointsQueue=new Queue<(Transform, Transform[,])>();
     #endregion
-    //해당 스테이지의 데이터를 받아서 스폰 팩토리가 생성하게 만듬. 
-    //몬스터 스폰 팩토리
-    //아이템 스폰 팩토리
-    //등등 ..
-    //웨이브의 데이터를 받아서 1.몬스터 2.아이템(양자택일/젬/장애물)둘 중 하나를 스폰한다 .
-    //죽거나 피한것들은 다시 팩토리에 넣어줄것임
+   
     protected override void OnInitialize()
     {
         GenerateFactory();
@@ -37,7 +31,7 @@ public class SpawnManager : TSingletonMono<SpawnManager>
     void GenerateSpawnPoints()
     {
         var prefab = Resources.Load<Transform>("Prefabs/SpawnPoints");
-        var cloneAsset = Instantiate(prefab, this.transform);
+        var cloneAsset = Instantiate(prefab,actorFactoryRoot);
         Populate2DArray(cloneAsset);
     }
     void Populate2DArray(Transform parentTransform)
@@ -52,20 +46,19 @@ public class SpawnManager : TSingletonMono<SpawnManager>
             for(int j=0;j<colCount;j++)
                 spawnPoint2DArray[i,j] = rowPoints.GetChild(j);
         }
-        spawnPointsQueue.Enqueue(spawnPoint2DArray);
+        spawnPointsQueue.Enqueue((parentTransform,spawnPoint2DArray));
     }
-    public Transform[,] GetSpawnPoints()
+    (Transform parent,Transform[,] points) GetSpawnPoints()
     {
-        var point = spawnPointsQueue.Dequeue();
-        if (point == null)
+        if (spawnPointsQueue.Count == 0)
             GenerateSpawnPoints();
+
         return spawnPointsQueue.Dequeue();
     }
-    // 해당 부분은 고민이 좀 필요할듯
     public void ReturnPoint(Transform returnPoint)
     {
-        returnPoint.SetParent(actorFactoryRoot);
-        Populate2DArray(returnPoint);
+        //returnPoint.SetParent(actorFactoryRoot);
+        //Populate2DArray(returnPoint);
     }
     #endregion
 
@@ -76,7 +69,9 @@ public class SpawnManager : TSingletonMono<SpawnManager>
         int rowCount = wave2DArray.GetLength(0);
         int colCount = wave2DArray.GetLength(1);
 
-        var spawnPoint = GetSpawnPoints();
+        var touple = GetSpawnPoints();
+        var parent = touple.parent;
+        var spawnPoint = touple.points;
 
         for (int i=0;i<rowCount;i++)
         {
@@ -95,6 +90,10 @@ public class SpawnManager : TSingletonMono<SpawnManager>
                 }
             }
         }
+
+        Transform spawnTargetBG = BackgroundManager.Instance.GetFirstBG();
+        parent.SetParent(spawnTargetBG);
+        parent.localPosition = Vector3.zero;
     }   
     long GetRandomMonsterIndex(long[]monsterIndexArr)
     {
