@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3906187923285326635}
   - component: {fileID: 3906187923285326636}
   - component: {fileID: 7661884888328209825}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: A
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -98,6 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9149a6dca4893943b6e9baa147df42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnHashCode: 0
+  index: 0
+  actorType: 0
   worldID: 0
 --- !u!61 &7661884888328209825
 BoxCollider2D:
