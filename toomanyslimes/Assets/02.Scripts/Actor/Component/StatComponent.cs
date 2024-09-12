@@ -5,11 +5,11 @@ using UnityEngine;
 public class StatComponent : BaseComponent
 {
     #region Fields
-    float hp;
+    double hp;
     float attackDamage;
     float attackSpeed;
 
-    public float HP=>hp;
+    public double HP=>hp;
     public float AttackDamage=>attackDamage;
     public float AttackSpeed=>attackSpeed;
     #endregion
@@ -19,10 +19,10 @@ public class StatComponent : BaseComponent
         OnReset();
         if(_owner.ActorType==eActorType.Enemy)
         {
-            var a = DataManager.MonsterTable[_owner.Index];
-            hp = a.HP;
-            attackDamage = a.AttackDamage;
-            attackSpeed = a.AttackSpeed;
+            var monsterData = DataManager.MonsterTable[_owner.Index];
+            this.hp = monsterData.HP;
+            attackDamage = monsterData.AttackDamage;
+            attackSpeed = monsterData.AttackSpeed;
         }
         //юс╫ц
         hp = 100;

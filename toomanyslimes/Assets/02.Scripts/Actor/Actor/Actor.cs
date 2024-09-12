@@ -12,7 +12,7 @@ public enum eActorType
 public class Actor : MonoBehaviour
 {
     #region Fields
-    // 고유 코드
+    // 고유 코드 : 같은 종류임을 확인
     [SerializeField]protected int spawnHashCode;
     public int SpawnHashCode => spawnHashCode;
     //인덱스
@@ -24,7 +24,7 @@ public class Actor : MonoBehaviour
     [SerializeField]eActorType actorType=eActorType.None;
     public eActorType ActorType => actorType;
 
-    //월드 아이디
+    //월드 아이디 : 스폰 매니저가 스폰한  순서
     [SerializeField] protected uint worldID;
     public uint WorldID => worldID;
 
@@ -39,7 +39,6 @@ public class Actor : MonoBehaviour
     public eFSMState FSMState => fsmComponent.State;
     public StatComponent Stat => statComponent;
     [SerializeField] protected StatComponent statComponent;
-
     #endregion
 
     #endregion
@@ -84,9 +83,15 @@ public class Actor : MonoBehaviour
     public virtual void Hit(float damage)
     {
         currentHP -= damage;
-        //ui 처리
         if (currentHP <= 0f)
+        {
+            currentHP = 0;
             Death();
+        }
+    }
+    public virtual void Recovery(double recovery)
+    {
+        System.Math.Clamp(currentHP += recovery,0,statComponent.HP);
     }
     #endregion
 

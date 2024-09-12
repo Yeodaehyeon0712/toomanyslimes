@@ -6,7 +6,7 @@ namespace Data
 {
     public class MonsterData
     {
-        public float HP;
+        public double HP;
         public float AttackDamage;
         public float AttackSpeed;
         public string ResourcePath;
@@ -17,7 +17,7 @@ namespace Data
         public MonsterData(Dictionary<string, string> dataPair)
         {
 
-            HP = float.Parse(dataPair["HP"]);
+            HP = double.Parse(dataPair["HP"]);
             AttackDamage = float.Parse(dataPair["AttackDamage"]);
             AttackSpeed = float.Parse(dataPair["AttackSpeed"]);
             ResourcePath = dataPair["ResourcePath"];
