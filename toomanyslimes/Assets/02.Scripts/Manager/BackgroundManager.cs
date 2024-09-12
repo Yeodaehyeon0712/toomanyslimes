@@ -5,7 +5,9 @@ using UnityEngine;
 public class BackgroundManager : TSingletonMono<BackgroundManager>
 {
     #region Fields
-    public bool IsBGMove { get; set; } 
+    public bool IsBGMove { get; set; }
+    public bool IsLastWave { get; set; }
+
     public float BGSpeed { get; set; } = 3;
 
     public Transform[] backgrounds = new Transform[3];
@@ -53,15 +55,29 @@ public class BackgroundManager : TSingletonMono<BackgroundManager>
     }
     void MoveBG()
     {
-        if (IsBGMove == false) return;
+        if (IsLastWave && backgrounds[startIndex].position.y < 0)
+        {
+            StopBGProcess();
+            return;
+        }
+
         transform.Translate(Vector3.down * BGSpeed * Time.deltaTime);
 
-        if (backgrounds[endIndex].position.y < -viewHeight)
+        if (backgrounds[endIndex].position.y < -viewHeight&&IsLastWave==false)
             ResetBG();
+    }
+    void StopBGProcess()
+    {
+        for (int i = 0; i < backgrounds.Length; i++)
+        {
+            if (startIndex == i) continue;
+            ResetSpawnPoints(i);
+        }
+        IsBGMove = false;
     }
     void ResetBG()
     {
-        ResetSpawnPoints();
+        ResetSpawnPoints(endIndex);
 
         Vector3 newPos = backgrounds[startIndex].localPosition + Vector3.up * viewHeight;
         backgrounds[endIndex].localPosition = newPos;
@@ -71,9 +87,9 @@ public class BackgroundManager : TSingletonMono<BackgroundManager>
 
         resetBGAction?.Invoke();
     }
-    void ResetSpawnPoints()
+    void ResetSpawnPoints(int index)
     {
-        var spawnPoints = backgrounds[endIndex].GetComponentInChildren<SpawnPoints>();
+        var spawnPoints = backgrounds[index].GetComponentInChildren<SpawnPoints>();
         spawnPoints?.ResetPoints();
     }
     //해당 액션 등록 해제도 생각하자 ..

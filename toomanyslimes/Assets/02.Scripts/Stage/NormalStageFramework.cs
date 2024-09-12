@@ -43,15 +43,14 @@ public class NormalStageFramework : StageFramework
     }
     void SpawnWave()
     {
-        if (currentWaveProgress >= RaceStageCount)
-        {
-            BackgroundManager.Instance.IsBGMove=false;
-            Debug.Log("모두 소진");
-            return;
-        }
         currentWaveProgress++;
         Data.WaveData waveData = DataManager.WaveTable[currentWaveProgress];
         SpawnManager.Instance.SpawnWave(waveData, CurrentStageData.MonsterIndexArr);
+        if (currentWaveProgress >= RaceStageCount)
+        {
+            BackgroundManager.Instance.IsLastWave = true;
+            Debug.Log("마지막 웨이브");
+        }
     }
     void CheckStageState()
     {
