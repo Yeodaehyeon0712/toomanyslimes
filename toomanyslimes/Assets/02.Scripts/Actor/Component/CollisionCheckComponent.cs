@@ -24,10 +24,11 @@ public class CollisionCheckComponent : BaseComponent
         CheckForward();
         CheckLeft();
         CheckRight();
+        CheckBattleTarget();
     }
     #endregion
 
-    #region Check Method  
+    #region Check Collision Method  
     public void CheckLeft()
     {
         Vector2 direction1 = Quaternion.Euler(0, 0, -45) * Vector2.left; 
@@ -70,27 +71,27 @@ public class CollisionCheckComponent : BaseComponent
         }
         return false;
     }
-    GameObject a;
+    #endregion
+
+    #region Check Battle Method
+    GameObject battleTarget;
     void CheckBattleTarget()
     {
         RaycastHit2D hit = Physics2D.Raycast(ownerTransform.position, Vector2.up, rayLength, obstacleLayer);
-        if (hit.collider == null) return;
-
-        //전방에 충돌한 적이 없다면
-        if (hit.collider.CompareTag("Enemy") == false)
+        //주변에 아무것도 충돌할게 없다거나 충돌체가 적이 아니라면 배틀하는 상태에서 벗어난다 .
+        if (hit.collider == null|| hit.collider.CompareTag("Enemy") == false)
         {
-            //내 상태는 배틀에서 벗어나 무브로 변경
-            a = null;
+            battleTarget = null;
             return;
         }
+        //이미 타겟으로 지정한 적과 충돌했다면 아무것도 하지 않는다 .
+        if (battleTarget == hit.collider.gameObject) return;
 
-        //충돌했지만 전에 충돌했던게 아니라면 공격의 대상을 변경
-        if (a != hit.collider.gameObject)
-        {
-            a = hit.collider.gameObject;
-            Debug.Log("공격");
-        }
-
+        //새로운 적이 감지되었다면
+        battleTarget = hit.collider.gameObject;
+        Debug.Log("공격");
+       
     }
+
     #endregion
 }
