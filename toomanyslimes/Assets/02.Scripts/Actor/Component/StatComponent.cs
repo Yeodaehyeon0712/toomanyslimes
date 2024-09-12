@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class StatComponent : BaseComponent
 {
+    #region Fields
+    float hp;
+    float attackDamage;
+    float attackSpeed;
+
+    public float HP=>hp;
+    public float AttackDamage=>attackDamage;
+    public float AttackSpeed=>attackSpeed;
+    #endregion
+
     public StatComponent(Actor owner) : base(owner, eComponent.StatComponent)
     {
         OnReset();
+        if(_owner.ActorType==eActorType.Enemy)
+        {
+            var a = DataManager.MonsterTable[_owner.Index];
+            hp = a.HP;
+            attackDamage = a.AttackDamage;
+            attackSpeed = a.AttackSpeed;
+        }
+        //임시
+        hp = 100;
+        attackDamage=50;
+        attackSpeed=1;
     }
-    //체력
-    //공격력
-    //원격 공격 여부
 
-    // Main Attack Status
-    public double AttackDamage;
-    public float AttackSpeed;
+    protected override void OnReset()
+    {
+        hp = 0f;
+        attackDamage = 0f;
+        attackSpeed = 0f;
+    }
+
 }

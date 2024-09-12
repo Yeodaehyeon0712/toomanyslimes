@@ -75,10 +75,8 @@ public class ActorFactory
                 break;
             case eActorType.Enemy:
                 {
-                    //resourcePath = DataManager.MonsterTable[index].ResourcePath;
-                    //pathHash = DataManager.MonsterTable[index].PathHash;
-                    resourcePath = "Prefabs/A";
-                    pathHash = 2;
+                    resourcePath = DataManager.MonsterTable[index].ResourcePath;
+                    pathHash = DataManager.MonsterTable[index].PathHash;
                 }
                 break;
         }

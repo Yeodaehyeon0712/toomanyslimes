@@ -50,7 +50,7 @@ public class BattleState : BaseState
         if (_owner.DefaultAttackElapsedTime < 1f) return;
         Debug.Log("АјАн");
         _owner.DefaultAttackElapsedTime = 0f;
-        _fsm.Target.Hit(3f);
+        _fsm.Target.Hit(_owner.Stat.AttackDamage);
     }
     void SkillAttack()
     {

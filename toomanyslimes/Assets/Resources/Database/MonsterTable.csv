@@ -1,7 +1,7 @@
 Index,Name,HP,AttackDamage,AttackSpeed,ResourcePath,IsBoss,IsRangedAttack
-1,GreenSlime,100,5,1,Actor/Monster/GreenSlime.prefab,FALSE,FALSE
-2,PinkSlime,150,7,1,Actor/Monster/PinkSlime.prefab,FALSE,FALSE
-3,PurpleSlime,100,4,1,Actor/Monster/PurpleSlime.prefab,FALSE,TRUE
-4,BearSlime,150,8,1,Actor/Monster/BearSlimeprefab,FALSE,FALSE
-5,PuddingSlime,250,8,1,Actor/Monster/PuddingSlime.prefab,FALSE,FALSE
-10001,SlimeKing,300,8,1,Actor/Monster/SlimeKing.prefab,TRUE,FALSE
+1,GreenSlime,100,5,1,Actor/Monster/GreenSlime,FALSE,FALSE
+2,PinkSlime,150,7,1,Actor/Monster/PinkSlime,FALSE,FALSE
+3,PurpleSlime,100,4,1,Actor/Monster/PurpleSlime,FALSE,TRUE
+4,BearSlime,150,8,1,Actor/Monster/BearSlime,FALSE,FALSE
+5,PuddingSlime,250,8,1,Actor/Monster/PuddingSlime,FALSE,FALSE
+10001,SlimeKing,300,8,1,Actor/Monster/SlimeKing,TRUE,FALSE

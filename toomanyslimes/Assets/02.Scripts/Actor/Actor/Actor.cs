@@ -12,7 +12,6 @@ public enum eActorType
 public class Actor : MonoBehaviour
 {
     #region Fields
-
     // 고유 코드
     [SerializeField]protected int spawnHashCode;
     public int SpawnHashCode => spawnHashCode;
@@ -29,14 +28,18 @@ public class Actor : MonoBehaviour
     [SerializeField] protected uint worldID;
     public uint WorldID => worldID;
 
-
-    protected double currentHP=5;
+    //스탯
+    protected double currentHP;
     public float DefaultAttackElapsedTime;
+
     #region Component Fields
     protected Dictionary<eComponent, BaseComponent> _componentDictionary = new Dictionary<eComponent, BaseComponent>();
     public FSMComponent FSM => fsmComponent;
     [SerializeField] protected FSMComponent fsmComponent;
     public eFSMState FSMState => fsmComponent.State;
+    public StatComponent Stat => statComponent;
+    [SerializeField] protected StatComponent statComponent;
+
     #endregion
 
     #endregion
@@ -45,6 +48,7 @@ public class Actor : MonoBehaviour
     public virtual void Initialize()
     {
         fsmComponent = new FSMComponent(this);
+        statComponent = new StatComponent(this);
     }
     #endregion
 
@@ -52,7 +56,7 @@ public class Actor : MonoBehaviour
     protected virtual void Update()
     {
         OnUpdateComponent(Time.deltaTime);
-        DefaultAttackElapsedTime += Time.deltaTime;
+        DefaultAttackElapsedTime += Time.deltaTime * statComponent.AttackSpeed;
     }
     protected virtual void FixedUpdate()
     {
@@ -67,6 +71,7 @@ public class Actor : MonoBehaviour
         worldID = _worldID;
         spawnHashCode = _spawnHashCode;
         actorType = _type;
+        currentHP = statComponent.HP;
         gameObject.SetActive(true);
     }
     public virtual void Death()
