@@ -9,9 +9,7 @@ public class SpawnManager : TSingletonMono<SpawnManager>
     //몬스터와 캐릭터를 관리 ..
     ActorFactory actorFactory;
     Transform actorFactoryRoot;
-    [SerializeField]
-    public Transform[,] spawnPoint2DArray;
-
+    Queue<Transform[,]> spawnPointsQueue=new Queue<Transform[,]>();
     #endregion
     //해당 스테이지의 데이터를 받아서 스폰 팩토리가 생성하게 만듬. 
     //몬스터 스폰 팩토리
@@ -46,7 +44,7 @@ public class SpawnManager : TSingletonMono<SpawnManager>
     {
         int rowCount = parentTransform.childCount;
         int colCount = parentTransform.GetChild(0).childCount;
-        spawnPoint2DArray = new Transform[rowCount,colCount];
+        var spawnPoint2DArray = new Transform[rowCount,colCount];
 
         for(int i=0;i<rowCount;i++)
         {
@@ -54,6 +52,20 @@ public class SpawnManager : TSingletonMono<SpawnManager>
             for(int j=0;j<colCount;j++)
                 spawnPoint2DArray[i,j] = rowPoints.GetChild(j);
         }
+        spawnPointsQueue.Enqueue(spawnPoint2DArray);
+    }
+    public Transform[,] GetSpawnPoints()
+    {
+        var point = spawnPointsQueue.Dequeue();
+        if (point == null)
+            GenerateSpawnPoints();
+        return spawnPointsQueue.Dequeue();
+    }
+    // 해당 부분은 고민이 좀 필요할듯
+    public void ReturnPoint(Transform returnPoint)
+    {
+        returnPoint.SetParent(actorFactoryRoot);
+        Populate2DArray(returnPoint);
     }
     #endregion
 
@@ -64,23 +76,32 @@ public class SpawnManager : TSingletonMono<SpawnManager>
         int rowCount = wave2DArray.GetLength(0);
         int colCount = wave2DArray.GetLength(1);
 
+        var spawnPoint = GetSpawnPoints();
+
         for (int i=0;i<rowCount;i++)
         {
             for(int j=0;j<colCount;j++)
             {
                 var item = wave2DArray[i, j];
-                var tr = spawnPoint2DArray[i, j];
+                var tr = spawnPoint[i, j];
                 if (item==0)
                 {
                     //아무것도 안함
                 }
                 else if(item==1)
                 {
-                    actorFactory.GetActor<Actor>(eActorType.Enemy,0,tr);
+                    long monster = GetRandomMonsterIndex(monsterIndexArr);
+                    actorFactory.GetActor<Actor>(eActorType.Enemy,monster,tr);
                 }
             }
         }
+    }   
+    long GetRandomMonsterIndex(long[]monsterIndexArr)
+    {
+        int selectRandom = Random.Range(0, monsterIndexArr.Length);
+        return monsterIndexArr[selectRandom];
     }
+    #region Valid Check Method
     //(int,int)? ValidateWave(Data.WaveData waveData)
     //{
     //    var wave2DArray = waveData.Wave2DArray;
@@ -99,6 +120,6 @@ public class SpawnManager : TSingletonMono<SpawnManager>
     //    Debug.LogWarning($"Warning : Wave {waveData}is Not Valid .");
     //    return null;
     //}
-
+    #endregion
 
 }
