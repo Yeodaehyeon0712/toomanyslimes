@@ -15,7 +15,7 @@ public class ActorFactory
     {
         instanceRoot = _instanceRoot;
         currentWorldID = 0;
-        actorPool = new Dictionary<eActorType, Dictionary<int, MemoryPool<Actor>>>();
+        actorPool = new Dictionary<eActorType, Dictionary<int,MemoryPool<Actor>>>();
         for(eActorType i=0;i<eActorType.End;++i)
         {
             actorPool[i] = new Dictionary<int, MemoryPool<Actor>>();
@@ -28,9 +28,9 @@ public class ActorFactory
     {
         ++currentWorldID;
 
-        string resourcePath = "Prefabs/AB";
-        int pathHash = 0;
-        //데이터 매니저로부터 해당 인덱스의 데이터를 받는다 .
+        var data = GetDataByType(type, index);
+        string resourcePath = data.resourcePath;
+        int pathHash = data.pathHash;
 
         //만약 해당 풀에 해당 종류의 액터가 없다면 풀을 생성
         if (actorPool[type].ContainsKey(pathHash)==false)
@@ -57,6 +57,32 @@ public class ActorFactory
         spawnedActor.Spawn(index, currentWorldID, pathHash, type);
         actorDic.Add(currentWorldID, spawnedActor);
         return spawnedActor;
+    }
+    public (string resourcePath,int pathHash) GetDataByType(eActorType type,long index)
+    {
+        string resourcePath=null;
+        int pathHash = 0;
+
+        switch (type)
+        {
+            case eActorType.Player:
+                {
+                    //resourcePath = DataManager.CharacterTable[index].ResourcePath;
+                    //pathHash = DataManager.CharacterTable[index].PathHash;
+                    resourcePath = "Prefabs/AB";
+                    pathHash = 1;
+                }
+                break;
+            case eActorType.Enemy:
+                {
+                    //resourcePath = DataManager.MonsterTable[index].ResourcePath;
+                    //pathHash = DataManager.MonsterTable[index].PathHash;
+                    resourcePath = "Prefabs/A";
+                    pathHash = 2;
+                }
+                break;
+        }
+        return (resourcePath,pathHash);
     }
     public void RegisterActorAtPool(uint worldID)
     {
