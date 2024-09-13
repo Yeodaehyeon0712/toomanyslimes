@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum eWaveType
+{
+    None,
+    Enemy,
+    Item,
+    Area,
+    Boss,
+    End,
+}
 namespace Data
 {
     public class WaveData
     {
-        public readonly long[,] Wave2DArray;
+        public readonly eWaveType[,] Wave2DArray;
 
         public WaveData(Dictionary<string, string> dataPair)
         {
             int rowCount = dataPair.Count - 1;
             int colCount = 5;//이건 생각좀 ..
 
-            Wave2DArray = new long[rowCount, colCount];
+            Wave2DArray = new eWaveType[rowCount, colCount];
 
             for (int i = 0; i < rowCount; i++)
             {
@@ -28,7 +37,7 @@ namespace Data
                     }
 
                     for (int j = 0; j < colCount; j++)
-                        Wave2DArray[i, j] = columnArray[j];
+                        Wave2DArray[i, j] = (eWaveType)columnArray[j];
                 }
             }
         }

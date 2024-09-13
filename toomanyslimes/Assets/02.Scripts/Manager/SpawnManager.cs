@@ -51,7 +51,7 @@ public class SpawnManager : TSingletonMono<SpawnManager>
     #region Spawn Method
     public T SpawnCharacter<T>(long index) where T : Actor => actorFactory.GetActor<T>(eActorType.Player, index);
 
-    public void SpawnWave(Data.WaveData waveData,long[]monsterIndexArr)
+    public void SpawnWave(Data.WaveData waveData,long[]monsterIndexArr,long bossIndex)
     {
         var wave2DArray = waveData.Wave2DArray;
         int rowCount = wave2DArray.GetLength(0);
@@ -63,25 +63,40 @@ public class SpawnManager : TSingletonMono<SpawnManager>
         {
             for(int j=0;j<colCount;j++)
             {
-                var item = wave2DArray[i, j];
+                var waveType = wave2DArray[i, j];
                 var point = points.GetPoint(i, j);
-                if (item==0)
-                {
-                    //아무것도 안함
-                }
-                else if(item==1)
-                {
-                    long monsterIndex = GetRandomMonsterIndex(monsterIndexArr);
-                    var actor = actorFactory.GetActor<Actor>(eActorType.Enemy,monsterIndex,point);
-                    points.RegisterActor(actor);
-                }
+                SpawnByWaveType(waveType, monsterIndexArr, bossIndex, point, points);
             }
         }
 
         Transform spawnTargetBG = BackgroundManager.Instance.GetFirstBG();
         points.transform.SetParent(spawnTargetBG);
         points.transform.localPosition = Vector3.zero;
-    }   
+    }  
+    void SpawnByWaveType(eWaveType type,long[] monsterIndexArr,long bossIndex,Transform point,SpawnPoints points)
+    {
+        switch(type)
+        {
+            case eWaveType.None:
+                break;
+            case eWaveType.Enemy: 
+            case eWaveType.Boss:
+                {
+                    long monsterIndex =( type==eWaveType.Enemy?GetRandomMonsterIndex(monsterIndexArr):bossIndex);
+                    var actor = actorFactory.GetActor<Actor>(eActorType.Enemy, monsterIndex, point);
+                    points.RegisterActor(actor);
+                    break;
+                }
+            case eWaveType.Item:
+                {
+                    break;
+                }
+            case eWaveType.Area:
+                {
+                    break;
+                }
+        }
+    }
     long GetRandomMonsterIndex(long[]monsterIndexArr)
     {
         int selectRandom = Random.Range(0, monsterIndexArr.Length);

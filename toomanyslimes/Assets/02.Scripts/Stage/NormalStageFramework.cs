@@ -5,6 +5,7 @@ using UnityEngine;
 public class NormalStageFramework : StageFramework
 {
     Data.StageData CurrentStageData => DataManager.StageTable[stageIndex];
+    //To Do : 플레이어에 귀속
     long stageIndex;
 
     int RaceStageCount;
@@ -45,7 +46,7 @@ public class NormalStageFramework : StageFramework
     {
         currentWaveProgress++;
         Data.WaveData waveData = DataManager.WaveTable[currentWaveProgress];
-        SpawnManager.Instance.SpawnWave(waveData, CurrentStageData.MonsterIndexArr);
+        SpawnManager.Instance.SpawnWave(waveData, CurrentStageData.MonsterIndexArr,CurrentStageData.BossIndex);
         if (currentWaveProgress >= RaceStageCount)
         {
             BackgroundManager.Instance.IsLastWave = true;
