@@ -87,14 +87,14 @@ public class UStoreUI : UPopUpUI
     }
     public void CheckEnablePurchase()
     {
-        if (Player.Coin < 5)
-        {
-            btn_CoinBuff.enabled = false;
-            btn_BladeSkill.enabled = false;
-            btn_FireSkill.enabled = false;
-            btn_RecoveryBuff.enabled = false;
-        }
-        Player.Coin -= 5;
+        //if (Player.Coin < 5)
+        //{
+        //    btn_CoinBuff.enabled = false;
+        //    btn_BladeSkill.enabled = false;
+        //    btn_FireSkill.enabled = false;
+        //    btn_RecoveryBuff.enabled = false;
+        //}
+        //Player.Coin -= 5;
     }
 
 }
