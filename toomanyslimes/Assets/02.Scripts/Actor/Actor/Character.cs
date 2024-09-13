@@ -23,5 +23,10 @@ public class Character : Actor
         if (controllerComponent != null)
             controllerComponent.FixedUpdate(Time.fixedDeltaTime);
     }
+    public override void Spawn(long _index, uint _worldID, int _spawnHashCode, eActorType _type)
+    {
+        base.Spawn(_index, _worldID, _spawnHashCode, _type);
+        hpBar.ShowHPBar(true);
+    }
     #endregion
 }

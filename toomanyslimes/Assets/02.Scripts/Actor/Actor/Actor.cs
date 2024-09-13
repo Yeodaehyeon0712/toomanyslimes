@@ -32,6 +32,8 @@ public class Actor : MonoBehaviour
     protected double currentHP;
     public float DefaultAttackElapsedTime;
 
+    protected HPBar hpBar;
+
     #region Component Fields
     protected Dictionary<eComponent, BaseComponent> _componentDictionary = new Dictionary<eComponent, BaseComponent>();
     public FSMComponent FSM => fsmComponent;
@@ -48,6 +50,7 @@ public class Actor : MonoBehaviour
     {
         fsmComponent = new FSMComponent(this);
         statComponent = new StatComponent(this);
+        hpBar = transform.Find("HPBar").GetComponent<HPBar>();
     }
     #endregion
 
@@ -73,6 +76,7 @@ public class Actor : MonoBehaviour
         actorType = _type;
         ResetComponent();
         currentHP = statComponent.HP;
+        hpBar.Init(statComponent.HP);
         gameObject.SetActive(true);
     }
     public virtual void Death()
@@ -86,6 +90,7 @@ public class Actor : MonoBehaviour
     public virtual void Hit(float damage)
     {
         currentHP -= damage;
+        hpBar.SetHP(currentHP);
         if (currentHP <= 0f)
         {
             currentHP = 0;
@@ -96,6 +101,7 @@ public class Actor : MonoBehaviour
     public virtual void Recovery(double recovery)
     {
         System.Math.Clamp(currentHP += recovery,0,statComponent.HP);
+        hpBar.SetHP(currentHP);
     }
     #endregion
 
