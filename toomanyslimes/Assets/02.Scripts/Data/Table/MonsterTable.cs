@@ -23,7 +23,7 @@ namespace Data
             ResourcePath = dataPair["ResourcePath"];
             PathHash = ResourcePath.GetHashCode();
             IsBoss = bool.Parse(dataPair["IsBoss"]);
-            IsBoss = bool.Parse(dataPair["IsRangedAttack"]);
+            IsRangeAttack = bool.Parse(dataPair["IsRangedAttack"]);
         }
     }
 }
