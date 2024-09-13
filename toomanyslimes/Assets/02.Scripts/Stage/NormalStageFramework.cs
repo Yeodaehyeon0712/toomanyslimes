@@ -39,7 +39,11 @@ public class NormalStageFramework : StageFramework
                 yield return ExitStage(() =>Debug.Log("Rmx"),1f);
                 break;
             case eContentResultState.Defeat:
+                {
+                    Debug.Log("패배");
+                    BackgroundManager.Instance.IsBGMove = false;
                 break;
+                }
         }
     }
     void SpawnWave()
@@ -55,12 +59,12 @@ public class NormalStageFramework : StageFramework
     }
     void CheckStageState()
     {
-        ////플레이어가 죽었다면
-        //if (Player.PlayerCharacter.FSMState == eFSMState.Death)
-        //{
-        //    currentContentsResultState = eContentResultState.Defeat;
-        //    return;
-        //}
+        //플레이어가 죽었다면
+        if (Player.PlayerCharacter.FSMState == eFSMState.Death)
+        {
+            currentContentsResultState = eContentResultState.Defeat;
+            return;
+        }
         ////보스가 죽었다면
         //if(true)
         //{
