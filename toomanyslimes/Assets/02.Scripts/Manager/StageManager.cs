@@ -52,4 +52,8 @@ public class StageManager : TSingletonMono<StageManager>
         mainProcess = null;
         isChangingStage = false;
     }
+    public T GetFramework<T>(eContentsType type) where T : StageFramework
+    {
+        return stageFrameworkDic[type] as T;
+    }
 }

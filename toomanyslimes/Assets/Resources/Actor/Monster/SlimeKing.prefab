@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3791656380013727595}
-  - component: {fileID: 3791656380013727597}
+  - component: {fileID: 4052977925464053781}
   - component: {fileID: 7565838386089751008}
   m_Layer: 3
   m_Name: SlimeKing
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3791656380013727597
+--- !u!114 &4052977925464053781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3791656380013727596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9149a6dca4893943b6e9baa147df42f, type: 3}
+  m_Script: {fileID: 11500000, guid: caafc167a8c8bd84f91b0ac989c37898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnHashCode: 0

@@ -33,15 +33,17 @@ public class NormalStageFramework : StageFramework
         }
 
         //해당 게임이 마무리 되었다면
+        BackgroundManager.Instance.IsBGMove = false;
         switch (currentContentsResultState)
         {
             case eContentResultState.Victory:
-                yield return ExitStage(() =>Debug.Log("Rmx"),1f);
-                break;
+                {
+                    Debug.Log("승리");
+                    break;
+                }
             case eContentResultState.Defeat:
                 {
                     Debug.Log("패배");
-                    BackgroundManager.Instance.IsBGMove = false;
                 break;
                 }
         }
@@ -65,12 +67,10 @@ public class NormalStageFramework : StageFramework
             currentContentsResultState = eContentResultState.Defeat;
             return;
         }
-        ////보스가 죽었다면
-        //if(true)
-        //{
-        //    currentContentsResultState = eContentResultState.Victory;
-        //    return;
-        //}
+    }
+    public void KillBoss()
+    {
+        currentContentsResultState = eContentResultState.Victory;
     }
 }
 
