@@ -6,10 +6,6 @@ public class BattleComponent : BaseComponent
 {
     public BattleComponent(Actor owner) : base(owner, eComponent.BattleComponent)
     {
-        OnReset();
-    }
-    protected override void OnUpdate(float deltaTime)
-    {
-        //АјАн ..
+
     }
 }

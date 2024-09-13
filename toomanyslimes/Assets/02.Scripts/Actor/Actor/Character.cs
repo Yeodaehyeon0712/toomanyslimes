@@ -9,16 +9,19 @@ public class Character : Actor
     public CollisionCheckComponent Collision => collisionCheckComponent;
     [SerializeField] protected CollisionCheckComponent collisionCheckComponent;
 
+
+    #region Actor Method
     public override void Initialize()
     {
         base.Initialize();
         controllerComponent = new ControllerComponent(this);
         collisionCheckComponent = new CollisionCheckComponent(this);
     }
-  
     protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         if (controllerComponent != null)
             controllerComponent.FixedUpdate(Time.fixedDeltaTime);
     }
+    #endregion
 }

@@ -23,7 +23,6 @@ public class BaseComponent
 
    public BaseComponent(Actor owner,eComponent componentType)
     {
-        _isActive = true;
         _owner = owner;
         _componentType = componentType;
         _owner.AddComponent(this);
@@ -42,7 +41,13 @@ public class BaseComponent
     }
     public void Reset()
     {
+        _isActive = true;
         OnReset();
+    }
+    public void Disable()
+    {
+        _isActive = false;
+        OnDisable();
     }
     public void Destroy()
     {
@@ -54,6 +59,7 @@ public class BaseComponent
     protected virtual void OnUpdate(float deltaTime) { }
     protected virtual void OnFixedUpdate(float fixedDeltaTime) { }
     protected virtual void OnReset() { }
+    protected virtual void OnDisable() { }
     protected virtual void OnDestroy() { }
     #endregion
 }

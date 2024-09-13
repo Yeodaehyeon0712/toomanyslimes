@@ -70,7 +70,7 @@ public class Actor : MonoBehaviour
         worldID = _worldID;
         spawnHashCode = _spawnHashCode;
         actorType = _type;
-        statComponent.Reset();
+        ResetComponent();
         currentHP = statComponent.HP;
         gameObject.SetActive(true);
     }
@@ -78,6 +78,7 @@ public class Actor : MonoBehaviour
     {
         fsmComponent.State = eFSMState.Death;
         SpawnManager.Instance.RegisterActorPool(worldID);
+        DisableComponent();
         StopAllCoroutines();
         gameObject.SetActive(false);
     }
@@ -120,6 +121,11 @@ public class Actor : MonoBehaviour
     {
         foreach (var component in _componentDictionary)
             component.Value.Reset();
+    }
+    void DisableComponent()
+    {
+        foreach (var component in _componentDictionary)
+            component.Value.Disable();
     }
     #endregion
 }

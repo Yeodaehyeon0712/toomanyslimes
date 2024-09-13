@@ -16,7 +16,6 @@ public class CollisionCheckComponent : BaseComponent
     #region Component Method
     public CollisionCheckComponent(Actor owner) : base(owner, eComponent.ColiisionCheckComponent)
     {
-        OnReset();
         controllerComponent = _owner.GetComponent<ControllerComponent>(eComponent.ControllerComponent);
         fsmComponent = _owner.FSM;
         ownerTransform = _owner.transform;
