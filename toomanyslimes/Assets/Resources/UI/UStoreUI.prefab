@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8153374981990148934}
   - component: {fileID: 3312187836665941173}
   m_Layer: 5
-  m_Name: Btn_Purchase (3)
+  m_Name: Btn_Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -366,7 +366,7 @@ RectTransform:
   m_GameObject: {fileID: 764806390234615450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3430761361403037495}
@@ -375,7 +375,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 124}
-  m_SizeDelta: {x: 16.666668, y: 29.166668}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8774555558785245425
 CanvasRenderer:
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3853900315991760761, guid: 5547e92425a5b584ba72bba3566474f0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22fafc3e4b16258438fb4240603b1949, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -844,7 +844,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fire Arrow
+  m_text: HP 30+
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ce4e65e452fd4a43b025f77eef91cf3, type: 2}
   m_sharedMaterial: {fileID: 2622526445018507742, guid: 7ce4e65e452fd4a43b025f77eef91cf3, type: 2}
@@ -1154,7 +1154,7 @@ RectTransform:
   m_GameObject: {fileID: 2137894040526857738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7236582524629455294}
@@ -1163,7 +1163,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 124}
-  m_SizeDelta: {x: 16.666668, y: 29.166668}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &896276712112896606
 CanvasRenderer:
@@ -1193,7 +1193,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3853900315991760761, guid: 5547e92425a5b584ba72bba3566474f0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7d1b8c1a026022641af7b846a3d34c63, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1414,7 +1414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.97647065, g: 0.38431376, b: 0.04705883, a: 1}
+  m_Color: {r: 0, g: 0.86666673, b: 0.20392159, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1883,7 +1883,7 @@ GameObject:
   - component: {fileID: 1895746853789285008}
   - component: {fileID: 7312541927212331908}
   m_Layer: 5
-  m_Name: Btn_Purchase
+  m_Name: Btn_FireSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2008,7 +2008,7 @@ GameObject:
   - component: {fileID: 9119951151463524874}
   - component: {fileID: 7926521911268025692}
   m_Layer: 5
-  m_Name: Btn_Purchase (2)
+  m_Name: Btn_Recovery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2341,7 +2341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fire Arrow
+  m_text: +10 Coin
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ce4e65e452fd4a43b025f77eef91cf3, type: 2}
   m_sharedMaterial: {fileID: 2622526445018507742, guid: 7ce4e65e452fd4a43b025f77eef91cf3, type: 2}
@@ -2497,6 +2497,7 @@ GameObject:
   - component: {fileID: 1115831725654483656}
   - component: {fileID: 7031493464048292269}
   - component: {fileID: 1509028038456582258}
+  - component: {fileID: 4265616727435654188}
   m_Layer: 5
   m_Name: UStoreUI
   m_TagString: Untagged
@@ -2568,6 +2569,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2
+--- !u!114 &4265616727435654188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6320726446751776957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ad8ce8eb7e3e647863a5f27d4185c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7101532753442260371
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,7 +2647,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fire Arrow
+  m_text: Rotation Blade
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ce4e65e452fd4a43b025f77eef91cf3, type: 2}
   m_sharedMaterial: {fileID: 2622526445018507742, guid: 7ce4e65e452fd4a43b025f77eef91cf3, type: 2}
@@ -2661,7 +2674,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.35
+  m_fontSize: 40.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3145,7 +3158,7 @@ RectTransform:
   m_GameObject: {fileID: 8128282176643821742}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1271947165729135840}
@@ -3154,7 +3167,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 124}
-  m_SizeDelta: {x: 16.666668, y: 29.166668}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2034981012223758364
 CanvasRenderer:
@@ -3184,7 +3197,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3853900315991760761, guid: 5547e92425a5b584ba72bba3566474f0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f752d344d11683842a810ca1ce47728d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3359,7 +3372,7 @@ GameObject:
   - component: {fileID: 7046150067125117585}
   - component: {fileID: 5579866875742483543}
   m_Layer: 5
-  m_Name: Btn_Purchase (1)
+  m_Name: Btn_GetCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3665,7 +3678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.97647065, g: 0.38431376, b: 0.04705883, a: 1}
+  m_Color: {r: 0, g: 0.8679245, b: 0.2021294, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

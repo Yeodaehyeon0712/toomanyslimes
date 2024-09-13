@@ -7,6 +7,7 @@ public class GameUI : MonoBehaviour
     public UMainUI Main;
     public USettingUI Setting;
     public UDescriptionUI Description;
+    public UStoreUI Store;
 
     public void Initialize()
     {
@@ -18,5 +19,7 @@ public class GameUI : MonoBehaviour
         Setting.Initialize();
         Description = safeArea.Find("Group_Movable/UDescriptionUI").GetComponent<UDescriptionUI>();
         Description.Initialize();
+        Store= safeArea.Find("Group_PopUp/UStoreUI").GetComponent<UStoreUI>();
+        Store.Initialize();
     }    
 }
