@@ -48,6 +48,10 @@ public class TitleScene : MonoBehaviour
         while (StageManager.Instance.IsLoad == false)
             yield return null;
 
+        UIManager.Instance.Initialize();
+        while (UIManager.Instance.IsLoad == false)
+            yield return null;
+
         yield return null;
         _sceneChangeEventButton.gameObject.SetActive(true);
     }
