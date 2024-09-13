@@ -23,12 +23,9 @@ public class MoveState : BaseState
     {
 
     }
-    #endregion
-
-
-
-    void OnMove(float deltaTime)
+    public override void Reset()
     {
-        //_owner.Transform.Translate(_owner.StatComponent.MoveSpeed * Vector3.right * deltaTime, Space.Self);
+        base.Reset();
     }
+    #endregion
 }

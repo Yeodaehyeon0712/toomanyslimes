@@ -5,16 +5,16 @@ using UnityEngine;
 public class BattleState : BaseState
 {
     #region Fields
-    protected float _elapsedTime = 0f;
-
+    float defaultAttackTime = 1.5f;
     #endregion
+
+    #region State Method
     public BattleState(Actor owner) : base(owner)
     {
 
     }
     public override void OnStateEnter()
     {
-        Debug.Log("공격 상태에 진입");
 
     }
     public override void OnStateStay(float deltaTime)
@@ -32,13 +32,17 @@ public class BattleState : BaseState
             Attack();            
         }
     }
-
     public override void OnStateExit()
     {
-        Debug.Log("공격 상태에서 벗어남");
-
         _fsm.Target = null;
     }
+    public override void Reset()
+    {
+
+    }
+    #endregion
+
+    #region Battle Method
 
     void Attack()
     {
@@ -47,8 +51,8 @@ public class BattleState : BaseState
     }
     void DefaultAttack()
     {
-        if (_owner.DefaultAttackElapsedTime < 1f) return;
-        Debug.Log("공격");
+        if (_owner.DefaultAttackElapsedTime < defaultAttackTime) return;
+
         _owner.DefaultAttackElapsedTime = 0f;
         _fsm.Target.Hit(_owner.Stat.AttackDamage);
     }
@@ -56,5 +60,5 @@ public class BattleState : BaseState
     {
 
     }
-
+    #endregion
 }

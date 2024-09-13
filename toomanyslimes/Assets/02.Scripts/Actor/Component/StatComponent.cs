@@ -21,6 +21,8 @@ public class StatComponent : BaseComponent
 
     protected override void OnReset()
     {
+        //스텟은 업데이트 사용 안할것이기에
+        _isActive = false;
         if (_owner.ActorType == eActorType.Enemy)
         {
             var monsterData = DataManager.MonsterTable[_owner.Index];
