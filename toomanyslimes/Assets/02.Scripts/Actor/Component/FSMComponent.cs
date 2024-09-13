@@ -5,7 +5,7 @@ public class FSMComponent : BaseComponent
 {
     #region Fields
     [SerializeField] Dictionary<eFSMState, BaseState> _fsmDictionary = new Dictionary<eFSMState, BaseState>();
-    eFSMState currentState = eFSMState.Death;
+    eFSMState currentState = eFSMState.Idle;
     public Actor Target;
 
     public eFSMState State
@@ -36,6 +36,7 @@ public class FSMComponent : BaseComponent
     #region FSM Method
     public void GenerateFSMState()
     {
+        _fsmDictionary.Add(eFSMState.Idle, new IdleState(_owner));
         _fsmDictionary.Add(eFSMState.Move, new MoveState(_owner));
         _fsmDictionary.Add(eFSMState.Battle, new BattleState(_owner));
         _fsmDictionary.Add(eFSMState.Death, new DeathState(_owner));

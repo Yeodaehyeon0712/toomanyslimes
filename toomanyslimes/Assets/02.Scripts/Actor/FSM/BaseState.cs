@@ -17,7 +17,8 @@ public abstract class BaseState
 }
 public enum eFSMState
 {
-    Move = 1 << 0,
-    Battle = 1 << 1,
-    Death = 1 << 2,
+    Idle=1<<0,
+    Move = 1 << 1,
+    Battle = 1 << 2,
+    Death = 1 << 3,
 }
