@@ -100,8 +100,16 @@ public class SpawnManager : TSingletonMono<SpawnManager>
                     Instantiate(origin, point);
                     break;
                 }
-            case eWaveType.Area:
+            case eWaveType.BuffArea:
                 {
+                    var origin = Resources.Load<GameObject>("Prefabs/BuffArea");
+                    Instantiate(origin, point);
+                    break;
+                }
+            case eWaveType.SkillArea:
+                {
+                    var origin = Resources.Load<GameObject>("Prefabs/SkillArea");
+                    Instantiate(origin, point);
                     break;
                 }
         }

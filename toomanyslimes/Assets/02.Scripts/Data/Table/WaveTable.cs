@@ -6,10 +6,11 @@ public enum eWaveType
     None,
     Enemy,
     Item,
-    Area,
+    SkillArea,
     Boss,
     Coin,
     Trap,
+    BuffArea,
     End,
 }
 namespace Data

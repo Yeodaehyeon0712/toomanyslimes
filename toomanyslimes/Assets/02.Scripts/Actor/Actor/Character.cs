@@ -27,10 +27,19 @@ public class Character : Actor
     {
         base.Spawn(_index, _worldID, _spawnHashCode, _type);
         hpBar.ShowHPBar(true);
-        FireArrowSkill skill = new FireArrowSkill(this);
-        battleComponent.RegisterSkill(skill);
-        //RotateBladeSkill skill = new RotateBladeSkill(this);
-        //battleComponent.RegisterSkill(skill);
+    }
+    public void RegisterSkill(bool isFire)
+    {
+        if(isFire)
+        {
+            FireArrowSkill skill = new FireArrowSkill(this);
+            battleComponent.RegisterSkill(skill);
+        }
+        else
+        {
+            RotateBladeSkill skill = new RotateBladeSkill(this);
+            battleComponent.RegisterSkill(skill);
+        }
     }
     #endregion
 }

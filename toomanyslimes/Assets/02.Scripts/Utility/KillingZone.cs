@@ -16,5 +16,10 @@ public class KillingZone : MonoBehaviour
             Item item = collision.GetComponent<Item>();
             item.DestroyItem();
         }
+        if(collision.CompareTag("Area"))
+        {
+            AreaBase area = collision.GetComponent<AreaBase>();
+            area.DestroyArea();
+        }
     }
 }
