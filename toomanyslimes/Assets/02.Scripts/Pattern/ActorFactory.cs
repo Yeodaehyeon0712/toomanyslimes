@@ -86,9 +86,9 @@ public class ActorFactory
 
         Actor temp = actorDic[worldID];
         actorDic.Remove(worldID);
-        //사용후 돌려놓는 과정
-        //actorPool[temp.ActorType][temp.SpawnHashCode].Register(temp);
-        temp.transform.SetParent(instanceRoot);//이건 테스트 .
+
+        actorPool[temp.ActorType][temp.SpawnHashCode].Register(temp);
+        temp.transform.SetParent(instanceRoot);
     }
     #endregion
 }
