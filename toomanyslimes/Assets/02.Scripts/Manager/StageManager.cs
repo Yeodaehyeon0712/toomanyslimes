@@ -12,6 +12,7 @@ public class StageManager : TSingletonMono<StageManager>
     bool isChangingStage;
     [SerializeField] eContentsType prevStage = eContentsType.End;
     [SerializeField] eContentsType currStage = eContentsType.End;
+    public eContentsType CurrentStageType => currStage;
     Coroutine mainProcess;
     Coroutine stageFramework;
 

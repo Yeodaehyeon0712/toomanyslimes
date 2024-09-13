@@ -33,6 +33,18 @@ public class UIManager : TSingletonMono<UIManager>
             scaler.matchWidthOrHeight = 1F;
         }
     }
+    public void ShowUIByContentType(eContentsType type)
+    {
+        switch(type)
+        {
+            case eContentsType.Normal:
+                {
+                    MainUI.Enable();
+                    MainUI.ShowNormalStagePanel();
+                    break;
+                }
+        }
+    }
 
 
 }
