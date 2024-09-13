@@ -55,7 +55,8 @@ public class Actor : MonoBehaviour
     protected virtual void Update()
     {
         OnUpdateComponent(Time.deltaTime);
-        DefaultAttackElapsedTime += Time.deltaTime * statComponent.AttackSpeed;
+        if(FSMState==eFSMState.Battle)
+            DefaultAttackElapsedTime += Time.deltaTime * statComponent.AttackSpeed;
     }
     protected virtual void FixedUpdate()
     {

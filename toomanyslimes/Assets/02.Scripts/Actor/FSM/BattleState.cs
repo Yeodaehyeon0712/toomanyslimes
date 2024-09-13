@@ -15,7 +15,7 @@ public class BattleState : BaseState
     }
     public override void OnStateEnter()
     {
-
+        _owner.DefaultAttackElapsedTime = 0;
     }
     public override void OnStateStay(float deltaTime)
     {
@@ -34,6 +34,7 @@ public class BattleState : BaseState
     }
     public override void OnStateExit()
     {
+        _owner.DefaultAttackElapsedTime = 0;
         _fsm.Target = null;
     }
     public override void Reset()
