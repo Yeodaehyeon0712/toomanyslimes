@@ -28,6 +28,10 @@ public class TitleScene : MonoBehaviour
     }
     IEnumerator InitManager()
     {
+        LocalizingManager.Instance.Initialize();
+        while (LocalizingManager.Instance.IsLoad == false)
+            yield return null;
+
         DataManager.Instance.Initialize();
         while (DataManager.Instance.IsLoad == false)
             yield return null;

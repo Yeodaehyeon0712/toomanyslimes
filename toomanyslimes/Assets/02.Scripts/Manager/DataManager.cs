@@ -9,7 +9,7 @@ public class DataManager : TSingletonMono<DataManager>
     public static StageTable StageTable;
     public static MonsterTable MonsterTable;
     public static CharacterTable CharacterTable;
-
+    public static LocalizingTable LocalizingTable;
 
     protected override void OnInitialize()
     {
@@ -24,6 +24,9 @@ public class DataManager : TSingletonMono<DataManager>
 
         CharacterTable = LoadTable<CharacterTable>(eTableName.CharacterTable);
         CharacterTable.Reload();
+
+        LocalizingTable = LoadTable<LocalizingTable>(eTableName.LocalizingTable);
+        LocalizingTable.Reload();
 
         IsLoad = true;      
     }
@@ -42,5 +45,6 @@ public enum eTableName
     StageTable = 1 << 1,
     MonsterTable = 1 << 2,
     CharacterTable=1<<3,
+    LocalizingTable=1<<4,
     All = ~0,
 }
