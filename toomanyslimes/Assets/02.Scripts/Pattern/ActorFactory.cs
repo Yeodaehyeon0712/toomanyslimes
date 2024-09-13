@@ -52,6 +52,7 @@ public class ActorFactory
         {
             if(spawnPoint!=null)
             spawnedActor.transform.SetParent(spawnPoint);
+            spawnedActor.transform.localPosition = Vector3.zero;
         }
 
         spawnedActor.Spawn(index, currentWorldID, pathHash, type);
@@ -89,6 +90,7 @@ public class ActorFactory
 
         actorPool[temp.ActorType][temp.SpawnHashCode].Register(temp);
         temp.transform.SetParent(instanceRoot);
+        temp.transform.localPosition = Vector3.zero;
     }
     #endregion
 }
