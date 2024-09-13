@@ -19,7 +19,7 @@ public class BattleComponent : BaseComponent
     }
     public void RegisterSkill(SkillBase newSkill)
     {
-        newSkill.Init(_owner);
+        newSkill.Init();
         skillList.Add(newSkill);
     }
 }

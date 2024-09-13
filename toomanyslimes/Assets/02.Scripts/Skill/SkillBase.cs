@@ -14,9 +14,9 @@ public abstract class SkillBase
     {
         owner = _owner;
     }
-    public virtual void Init(Actor _owner)
+    public virtual void Init()
     {
-        owner = _owner;
+
     }
     public void OnUpdate(float deltaTime)
     {

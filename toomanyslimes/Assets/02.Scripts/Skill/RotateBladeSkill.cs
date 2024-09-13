@@ -14,9 +14,9 @@ public class RotateBladeSkill : SkillBase
         owner = _owner;
     }
 
-    public override void Init(Actor _owner)
+    public override void Init()
     {
-        base.Init(_owner);
+        base.Init();
 
         skillUseTime = 6;
         skillDurationTime = 6;
@@ -27,7 +27,7 @@ public class RotateBladeSkill : SkillBase
             float angle = i * Mathf.PI * 2 / bladeCount;
             Vector3 bladePosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
             var prefab = Resources.Load<BladeWeapon>("Weapon/Blade");
-            blades[i] = Object.Instantiate(prefab, (Vector2)_owner.transform.position + (Vector2)bladePosition, Quaternion.identity, _owner.transform);
+            blades[i] = Object.Instantiate(prefab, (Vector2)owner.transform.position + (Vector2)bladePosition, Quaternion.identity, owner.transform);
             blades[i].InitWeapon();
         }
         StopSkill();
