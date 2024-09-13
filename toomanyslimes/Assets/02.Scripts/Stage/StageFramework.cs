@@ -29,6 +29,10 @@ public abstract class StageFramework
         yield return new WaitForSeconds(time);
         afterAction?.Invoke();
     }
+    public virtual void CompleteStage()
+    {
+        currentContentsResultState = eContentResultState.Victory;
+    }
     public virtual IEnumerator CleanStage()
     {
         yield return null;

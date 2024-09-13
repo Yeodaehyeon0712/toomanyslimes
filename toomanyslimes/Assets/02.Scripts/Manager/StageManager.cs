@@ -56,4 +56,8 @@ public class StageManager : TSingletonMono<StageManager>
     {
         return stageFrameworkDic[type] as T;
     }
+    public void CompleteStage()
+    {
+        stageFrameworkDic[currStage].CompleteStage();
+    }
 }

@@ -9,6 +9,6 @@ public class Monster : Actor
     {
         base.Death();
         if (isBoss)
-            StageManager.Instance.GetFramework<NormalStageFramework>(eContentsType.Normal).KillBoss();
+            StageManager.Instance.CompleteStage();
     }
 }

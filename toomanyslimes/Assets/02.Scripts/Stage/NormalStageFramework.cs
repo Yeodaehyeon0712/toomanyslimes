@@ -68,9 +68,5 @@ public class NormalStageFramework : StageFramework
             return;
         }
     }
-    public void KillBoss()
-    {
-        currentContentsResultState = eContentResultState.Victory;
-    }
 }
 
