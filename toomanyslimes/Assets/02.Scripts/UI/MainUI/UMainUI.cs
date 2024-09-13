@@ -30,8 +30,8 @@ public class UMainUI : UBaseUI
 
         panel_bossStage= transform.Find("Panel_BossStage").gameObject;
         text_bossHP= transform.Find("Panel_BossStage/Text_BossHP").GetComponent<TextMeshProUGUI>();
-        slider_progress = transform.Find("Panel_BossStage/Slider_BossHP").GetComponent<Slider>();
-        slider_progress.value = 1f;;
+        slider_bossHP = transform.Find("Panel_BossStage/Slider_BossHP").GetComponent<Slider>();
+        slider_bossHP.value = 1f;;
     }
 
     protected override void OnRefresh()
@@ -67,9 +67,9 @@ public class UMainUI : UBaseUI
         panel_normalStage.SetActive(false);
         panel_bossStage.SetActive(true);
     }
-    public void SetHPSlider(float currentHP,float maxHP)
+    public void SetBossHPSlider(double currentHP,double maxHP)
     {
-        slider_bossHP.value = currentHP / maxHP;
+        slider_bossHP.value = (float)(currentHP / maxHP);
         text_bossHP.text = currentHP.ToString();
     }
     #endregion

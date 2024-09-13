@@ -13,9 +13,17 @@ public class Monster : Actor
     }
     public override void Hit(float damage)
     {
-        if (hpBar.isActiveAndEnabled == false)
+        if ((hpBar.isActiveAndEnabled == false)&&(isBoss==false))
             hpBar.ShowHPBar(true);
         base.Hit(damage);
-        //HP 바를 켜준다 . 만약 보스라면 UI로 보여준다 .
+    
+        if (isBoss)
+            SetBossHPBar();
+    }
+    void SetBossHPBar()
+    {
+        //이건 나중에 보스 진입시 사용 ..
+        UIManager.Instance.MainUI.ShowBossStagePanel();
+        UIManager.Instance.MainUI.SetBossHPSlider(currentHP,statComponent.HP);
     }
 }

@@ -34,6 +34,7 @@ public class NormalStageFramework : StageFramework
 
         //해당 게임이 마무리 되었다면
         BackgroundManager.Instance.IsBGMove = false;
+        UIManager.Instance.MainUI.Disable();
         switch (currentContentsResultState)
         {
             case eContentResultState.Victory:

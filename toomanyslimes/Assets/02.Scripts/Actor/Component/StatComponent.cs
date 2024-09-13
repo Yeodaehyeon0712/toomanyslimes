@@ -33,7 +33,7 @@ public class StatComponent : BaseComponent
         else if (_owner.ActorType == eActorType.Player)
         {
             //юс╫ц
-            hp = 100;
+            hp = 10000000;
             attackDamage = 50;
             attackSpeed = 1;
         }
