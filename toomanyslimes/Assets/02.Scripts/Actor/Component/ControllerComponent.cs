@@ -5,7 +5,7 @@ using UnityEngine;
 public class ControllerComponent : BaseComponent
 {
     #region Fields
-    public float speed=3;
+    public float speed=5;
     public bool TouchedLeft{ get; set; }
     public bool TouchedRight { get; set; }
     #endregion

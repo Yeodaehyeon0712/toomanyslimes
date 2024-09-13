@@ -5,7 +5,7 @@ using UnityEngine;
 public class BattleState : BaseState
 {
     #region Fields
-    float defaultAttackTime = 1.5f;
+    float defaultAttackTime = 0.8f;
     #endregion
 
     #region State Method
