@@ -29,12 +29,6 @@ public class SpawnPoints : MonoBehaviour
     }
     public void ResetPoints()
     {
-        //남아 있던 액터들 모두 풀로 돌려보냄
-        foreach(var actor in actorList)
-        {
-            actor.gameObject.SetActive(false);
-            Debug.Log("제거");
-        }
         SpawnManager.Instance.RegisterCleanedSpawnPoints(this);
     }
     public void RegisterActor(Actor actor)

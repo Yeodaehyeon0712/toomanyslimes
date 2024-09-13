@@ -44,6 +44,8 @@ public class SpawnManager : TSingletonMono<SpawnManager>
     }
     public void RegisterCleanedSpawnPoints(SpawnPoints spawnPoints)
     {
+        spawnPoints.transform.SetParent(actorFactoryRoot);
+        spawnPoints.transform.localPosition = Vector3.zero;
         spawnPointsQueue.Enqueue(spawnPoints);
     }
     #endregion
@@ -65,7 +67,7 @@ public class SpawnManager : TSingletonMono<SpawnManager>
             {
                 var waveType = wave2DArray[i, j];
                 var point = points.GetPoint(i, j);
-                SpawnByWaveType(waveType, monsterIndexArr, bossIndex, point, points);
+                SpawnByWaveType(waveType, monsterIndexArr, bossIndex, point);
             }
         }
 
@@ -73,7 +75,7 @@ public class SpawnManager : TSingletonMono<SpawnManager>
         points.transform.SetParent(spawnTargetBG);
         points.transform.localPosition = Vector3.zero;
     }  
-    void SpawnByWaveType(eWaveType type,long[] monsterIndexArr,long bossIndex,Transform point,SpawnPoints points)
+    void SpawnByWaveType(eWaveType type,long[] monsterIndexArr,long bossIndex,Transform point)
     {
         switch(type)
         {
@@ -84,7 +86,6 @@ public class SpawnManager : TSingletonMono<SpawnManager>
                 {
                     long monsterIndex =( type==eWaveType.Enemy?GetRandomMonsterIndex(monsterIndexArr):bossIndex);
                     var actor = actorFactory.GetActor<Actor>(eActorType.Enemy, monsterIndex, point);
-                    points.RegisterActor(actor);
                     break;
                 }
             case eWaveType.Item:
