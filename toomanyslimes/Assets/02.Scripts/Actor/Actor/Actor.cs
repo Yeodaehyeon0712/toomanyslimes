@@ -41,6 +41,10 @@ public class Actor : MonoBehaviour
     public eFSMState FSMState => fsmComponent.State;
     public StatComponent Stat => statComponent;
     [SerializeField] protected StatComponent statComponent;
+    public BattleComponent Battle => battleComponent;
+
+    [SerializeField] protected BattleComponent battleComponent;
+
     #endregion
 
     #endregion
@@ -50,6 +54,7 @@ public class Actor : MonoBehaviour
     {
         fsmComponent = new FSMComponent(this);
         statComponent = new StatComponent(this);
+        battleComponent = new BattleComponent(this);
         hpBar = transform.Find("HPBar").GetComponent<HPBar>();
     }
     #endregion

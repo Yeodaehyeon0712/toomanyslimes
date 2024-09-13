@@ -27,6 +27,8 @@ public class Character : Actor
     {
         base.Spawn(_index, _worldID, _spawnHashCode, _type);
         hpBar.ShowHPBar(true);
+        RotateBladeSkill skill = new RotateBladeSkill(this);
+        battleComponent.RegisterSkill(skill);
     }
     #endregion
 }
