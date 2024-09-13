@@ -11,6 +11,7 @@ public class UIManager : TSingletonMono<UIManager>
     public GameUI GameUI => _gameUI;
     public USettingUI SettingUI => GameUI.Setting;
     public UDescriptionUI DescriptionUI => GameUI.Description;
+    public UStoreUI StoreUI => GameUI.Store;
     protected override void OnInitialize()
     {
         _gameUI = Instantiate(Resources.Load<GameUI>("UI/GameUI"), transform);

@@ -112,6 +112,12 @@ public class SpawnManager : TSingletonMono<SpawnManager>
                     Instantiate(origin, point);
                     break;
                 }
+            case eWaveType.StoreArea:
+                {
+                    var origin = Resources.Load<GameObject>("Prefabs/StoreArea");
+                    Instantiate(origin, point);
+                    break;
+                }
         }
     }
     long GetRandomMonsterIndex(long[]monsterIndexArr)

@@ -6,6 +6,8 @@ public class BackgroundManager : TSingletonMono<BackgroundManager>
 {
     #region Fields
     public bool IsBGMove { get; set; }
+    public bool IsBGMoveAtStore { get; set; }
+
     public bool IsLastWave { get; set; }
 
     public float BGSpeed { get; set; } = 3;
@@ -32,6 +34,7 @@ public class BackgroundManager : TSingletonMono<BackgroundManager>
     #region Unity Method
     private void Update()
     {
+        if (IsBGMoveAtStore) return;
         if (IsBGMove==false) return;
         MoveBG();
     }

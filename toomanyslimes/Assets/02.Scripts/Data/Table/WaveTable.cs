@@ -11,6 +11,7 @@ public enum eWaveType
     Coin,
     Trap,
     BuffArea,
+    StoreArea,
     End,
 }
 namespace Data
