@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 6631472404970276050}
   m_Layer: 0
   m_Name: Yeo
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

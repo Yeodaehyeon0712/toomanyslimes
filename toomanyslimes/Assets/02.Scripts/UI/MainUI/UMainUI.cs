@@ -49,6 +49,9 @@ public class UMainUI : UBaseUI
         Enable();
         panel_normalStage.SetActive(true);
         panel_bossStage.SetActive(false);
+
+        SetProgressSlider(0);
+        SetCoinCount(0);
     }
     public void SetCoinCount(int coinCount)
     {

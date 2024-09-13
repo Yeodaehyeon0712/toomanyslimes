@@ -88,8 +88,16 @@ public class SpawnManager : TSingletonMono<SpawnManager>
                     var actor = actorFactory.GetActor<Actor>(eActorType.Enemy, monsterIndex, point);
                     break;
                 }
-            case eWaveType.Item:
+            case eWaveType.Coin:
                 {
+                    var origin = Resources.Load<Coin>("Item/Coin");
+                    Instantiate(origin, point);
+                    break;
+                }
+            case eWaveType.Trap:
+                {
+                    var origin = Resources.Load<Trap>("Item/Trap");
+                    Instantiate(origin, point);
                     break;
                 }
             case eWaveType.Area:

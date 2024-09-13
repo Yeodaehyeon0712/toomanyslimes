@@ -8,6 +8,8 @@ public enum eWaveType
     Item,
     Area,
     Boss,
+    Coin,
+    Trap,
     End,
 }
 namespace Data

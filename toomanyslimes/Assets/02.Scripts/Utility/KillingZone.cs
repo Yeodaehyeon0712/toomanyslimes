@@ -11,5 +11,10 @@ public class KillingZone : MonoBehaviour
             Actor actor = collision.GetComponent<Actor>();
             actor?.Death();
         }
+        if (collision.CompareTag("Item"))
+        {
+            Item item = collision.GetComponent<Item>();
+            item.DestroyItem();
+        }
     }
 }
